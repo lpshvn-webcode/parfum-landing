@@ -1,0 +1,247 @@
+@font-face{font-family:Killer;src:url('./assets/manrope-400.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:Killer;src:url('./assets/manrope-600.ttf') format('truetype');font-weight:500 900;font-display:swap}
+#killer-perfume{--bg:#090c0e;--panel:#111619;--line:#ffffff21;--ink:#f1f0eb;--muted:#a0a8aa;--gold:#d5b98b;--accent:#8faeb6;--wine:#67172a;background:var(--bg);color:var(--ink);font:400 16px/1.65 Killer,Arial,sans-serif;isolation:isolate;overflow:clip;padding-bottom:108px;-webkit-tap-highlight-color:transparent}
+#killer-perfume *,#killer-perfume *::before,#killer-perfume *::after{box-sizing:border-box}
+#killer-perfume [hidden]{display:none!important}
+#killer-perfume :is(h1,h2,h3,h4,p){margin:0}
+#killer-perfume :is(h1,h2,h3){font-weight:600;letter-spacing:-2px;line-height:1.06}
+#killer-perfume h2{font-size:clamp(40px,5vw,72px)}
+#killer-perfume h2>span{color:#838e92}
+#killer-perfume button,#killer-perfume input{font:inherit}
+#killer-perfume :is(a,button){touch-action:manipulation}
+#killer-perfume button{cursor:pointer}
+#killer-perfume button:disabled{opacity:.4;cursor:not-allowed}
+#killer-perfume a{color:inherit;text-decoration:none}
+#killer-perfume img{display:block;width:100%;height:auto}
+#killer-perfume :is(button,a,input,summary):focus-visible{outline:2px solid var(--gold);outline-offset:5px}
+#killer-perfume .nk-wrap{width:min(1320px,calc(100% - 96px));margin-inline:auto}
+#killer-perfume .nk-section{padding-block:112px}
+#killer-perfume .nk-eyebrow{font-size:11px;letter-spacing:2px;color:var(--muted);margin-bottom:27px;font-weight:500}
+#killer-perfume .nk-header{height:95px;display:flex;align-items:center;justify-content:space-between;gap:32px;position:relative;z-index:2;border-bottom:1px solid var(--line)}
+#killer-perfume .nk-logo{display:flex;gap:15px;align-items:center;font-size:23px;font-weight:600;letter-spacing:4px;line-height:1.15}
+#killer-perfume .nk-logo small{display:block;font-size:8px;font-weight:400;letter-spacing:5px;margin-top:7px;color:var(--gold)}
+#killer-perfume .nk-logo-mark{font:44px/.9 Georgia,serif;color:var(--gold);letter-spacing:-13px;padding-right:14px}
+#killer-perfume .nk-logo-mark>span{font-size:30px;position:relative;top:7px}
+#killer-perfume .nk-header nav{display:flex;gap:40px;font-size:13px;color:#b5bfc2}
+#killer-perfume .nk-header nav a:hover{color:white}
+#killer-perfume .nk-header-cta{display:flex;align-items:center;gap:22px;font-size:13px}
+#killer-perfume .nk-arrow{position:relative;display:inline-block;width:18px;height:18px;flex-shrink:0}
+#killer-perfume .nk-arrow::before{content:"";position:absolute;right:2px;top:2px;width:11px;height:11px;border-top:1.5px solid currentColor;border-right:1.5px solid currentColor}
+#killer-perfume .nk-arrow::after{content:"";position:absolute;top:9px;left:0;width:19px;height:1.5px;background:currentColor;transform:rotate(-45deg)}
+#killer-perfume .nk-button{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:56px;border:1px solid transparent;border-radius:5px;padding:16px 23px;font-size:15px;font-weight:600;line-height:1.4;transition:background .2s,border-color .2s,transform .2s}
+#killer-perfume .nk-button-light{background:var(--ink);color:#111619}
+#killer-perfume .nk-button-light:hover:not(:disabled){background:#d8e3e5;transform:translateY(-1px)}
+#killer-perfume .nk-button-outline{background:transparent;color:var(--ink);border-color:#ffffff50}
+#killer-perfume .nk-button-outline:hover{background:#ffffff0d;border-color:#ffffff80}
+#killer-perfume .nk-hero{position:relative;overflow:hidden;background:radial-gradient(ellipse at 66% 45%,#17343a55,transparent 60%)}
+#killer-perfume[data-tone=gold] .nk-hero{background:radial-gradient(ellipse at 66% 45%,#80521d44,transparent 60%)}
+#killer-perfume[data-tone=wine] .nk-hero{background:radial-gradient(ellipse at 66% 45%,#6d0f2444,transparent 60%)}
+#killer-perfume .nk-hero-word{position:absolute;left:0;right:0;top:135px;font-size:clamp(190px,29vw,480px);font-weight:600;line-height:1;letter-spacing:-25px;text-align:center;color:transparent;-webkit-text-stroke:1px #a3b6bb1d;pointer-events:none}
+#killer-perfume .nk-hero-layout{position:relative;min-height:760px;display:grid;grid-template-columns:1fr 1.15fr;grid-template-rows:auto auto auto;padding-top:85px;padding-bottom:25px;column-gap:20px}
+#killer-perfume .nk-hero-copy{grid-column:1;grid-row:1;z-index:2;position:relative;align-self:end}
+#killer-perfume .nk-hero-copy .nk-eyebrow{display:flex;align-items:center;gap:10px;color:#a9bec4;margin-bottom:34px}
+#killer-perfume .nk-hero-copy .nk-eyebrow i{height:5px;width:5px;background:#b7d1d7;border-radius:50%}
+#killer-perfume h1{font-size:clamp(65px,7.4vw,110px);letter-spacing:-6px;line-height:.96;position:relative}
+#killer-perfume h1>span{color:#d4dfe1}
+#killer-perfume .nk-hero-description{font-size:16px;line-height:1.8;color:#b0bec2;margin-top:25px}
+#killer-perfume .nk-hero-stage{grid-row:1/3;grid-column:2;position:relative;margin-top:-65px;min-height:630px;display:flex;align-items:center;justify-content:center}
+#killer-perfume .nk-hero-stage>img{height:660px;width:100%;object-fit:contain;mask-image:linear-gradient(0deg,transparent 0%,black 14%,black 88%,transparent 100%);filter:drop-shadow(0 0 28px #31535b12)}
+#killer-perfume .nk-stage-label{position:absolute;right:0;top:50%;writing-mode:vertical-rl;font-size:10px;letter-spacing:2px;color:#84969b}
+#killer-perfume .nk-stage-label b{font-weight:400;color:#dce8eb;margin-top:15px}
+#killer-perfume .nk-product-caption{position:absolute;right:20px;bottom:26px;text-align:right}
+#killer-perfume .nk-product-caption>span{font-size:10px;letter-spacing:2px;color:#afbabd;display:block}
+#killer-perfume .nk-product-caption strong{font-size:23px;font-weight:400;letter-spacing:-.5px;display:block;margin-top:5px}
+#killer-perfume .nk-hero-offer{grid-row:2;grid-column:1;align-self:start;max-width:370px;margin-top:33px;position:relative;z-index:2}
+#killer-perfume .nk-offer-top{display:flex;gap:17px;align-items:center;font-size:13px;color:#aebdc1}
+#killer-perfume .nk-promo{border:1px solid #b69c7366;color:var(--gold);padding:5px 10px;font-size:12px;line-height:1.3;border-radius:3px}
+#killer-perfume .nk-hero-price{font-size:38px;line-height:1.2;letter-spacing:-1px;margin:19px 0 24px;display:flex;align-items:baseline;gap:9px}
+#killer-perfume .nk-hero-price>span{font-size:28px}
+#killer-perfume .nk-hero-price small{font-size:12px;letter-spacing:0;color:#9cabaf;margin-left:auto}
+#killer-perfume .nk-delivery{font-size:11px;line-height:1.8;color:#8e9ca0;margin-top:16px}
+#killer-perfume .nk-hero-switch{display:flex;gap:0;grid-row:3;grid-column:1/-1;margin-top:24px;align-self:end;border-top:1px solid var(--line);position:relative;z-index:2}
+#killer-perfume .nk-hero-switch button{background:transparent;color:#839399;border:0;border-top:1px solid transparent;margin-top:-1px;padding:23px 18px;flex:1;display:flex;align-items:center;gap:18px;text-align:left;font-size:13px}
+#killer-perfume .nk-hero-switch button>span{font-size:10px;color:#52676e}
+#killer-perfume .nk-hero-switch button[aria-pressed=true]{color:white;border-top-color:#bbced2}
+#killer-perfume .nk-brand-line{display:flex;align-items:center;justify-content:center;gap:40px;padding:28px 20px;border-block:1px solid var(--line);background:#0c1113;font-size:16px;letter-spacing:3px;color:#7f929a;overflow:hidden}
+#killer-perfume .nk-brand-line i{font-style:normal;font-size:12px;color:#5b6b71}
+#killer-perfume .nk-section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:35px;margin-bottom:43px}
+#killer-perfume .nk-section-head>p{color:var(--muted);font-size:15px;line-height:1.85;max-width:400px}
+#killer-perfume .nk-builder{background:radial-gradient(ellipse at 100% 70%,#14333b1c,transparent 60%),#0c1012}
+#killer-perfume .nk-mode-switch{display:flex;gap:9px;padding:6px;background:#171e21;border:1px solid #2a3439;border-radius:8px;max-width:570px;margin-bottom:32px}
+#killer-perfume .nk-mode-switch button{flex:1;padding:15px 20px;border:0;border-radius:5px;background:none;color:#d4dbdc;font-size:15px;text-align:left;line-height:1.4;min-height:70px}
+#killer-perfume .nk-mode-switch button>span{display:block;font-size:11px;color:#899b9f;margin-top:5px}
+#killer-perfume .nk-mode-switch button[aria-pressed=true]{background:#e4eaeb;color:#101719}
+#killer-perfume .nk-mode-switch button[aria-pressed=true]>span{color:#56656a}
+#killer-perfume .nk-mood-tabs{display:flex;gap:28px;align-items:center;margin-bottom:27px}
+#killer-perfume .nk-mood-tabs button{background:none;border:0;border-bottom:1px solid transparent;padding:12px 0;color:#91a2a7;font-size:14px;display:flex;gap:12px;align-items:center;min-height:46px}
+#killer-perfume .nk-mood-tabs button span{font-size:10px;color:#667d85}
+#killer-perfume .nk-mood-tabs button[aria-pressed=true]{color:white;border-color:#c9d4d7}
+#killer-perfume .nk-ready-feature{display:grid;grid-template-columns:1.15fr 1fr;border:1px solid #2b3438;background:#10171b;border-radius:10px;overflow:hidden}
+#killer-perfume .nk-ready-art{position:relative;min-height:590px;display:flex;align-items:center;justify-content:center;gap:0;background:radial-gradient(ellipse at 50% 45%,#27414c66,transparent 65%),#091114;overflow:hidden}
+#killer-perfume .nk-ready-art::before{content:"THE SET";position:absolute;top:28px;left:28px;font-size:64px;font-weight:600;letter-spacing:-4px;color:#dae7e50c}
+#killer-perfume .nk-ready-art img{width:42%;height:410px;object-fit:cover;border-radius:120px;mask-image:linear-gradient(0deg,transparent,black 18%,black 85%,transparent);box-shadow:0 0 35px #0003}
+#killer-perfume .nk-ready-art img:nth-child(1){transform:rotate(-12deg) translateX(20px) translateY(40px);z-index:1}
+#killer-perfume .nk-ready-art img:nth-child(2){transform:translateY(-18px);z-index:2;margin-inline:-65px}
+#killer-perfume .nk-ready-art img:nth-child(3){transform:rotate(12deg) translateX(-20px) translateY(40px);z-index:1}
+#killer-perfume .nk-ready-art>span{position:absolute;bottom:27px;left:28px;color:#9eb2b9;font-size:10px;letter-spacing:2px}
+#killer-perfume .nk-ready-copy{padding:49px 46px}
+#killer-perfume .nk-ready-copy h3{font-size:clamp(40px,4.2vw,59px);line-height:1.05;letter-spacing:-2.5px}
+#killer-perfume .nk-ready-copy>p:not(.nk-eyebrow):not(.nk-fine){font-size:16px;line-height:1.85;color:#a7b4b9;margin-top:22px}
+#killer-perfume .nk-ready-copy .nk-eyebrow{color:#90aab5}
+#killer-perfume .nk-preset-meta{display:flex;justify-content:space-between;gap:20px;font-size:14px;padding:23px 0;border-bottom:1px solid var(--line);margin-top:6px}
+#killer-perfume .nk-preset-meta>span:last-child{color:var(--gold)}
+#killer-perfume details summary{list-style:none;cursor:pointer}
+#killer-perfume summary::-webkit-details-marker{display:none}
+#killer-perfume .nk-preset-details summary{display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:13px;min-height:53px;color:#adbec4}
+#killer-perfume .nk-preset-details summary>span{font-size:23px}
+#killer-perfume details[open] summary>span{transform:rotate(45deg)}
+#killer-perfume #nk-preset-composition{font-size:13px;color:#a2b3b9;line-height:1.9;padding-bottom:22px}
+#killer-perfume #nk-preset-composition p+p{margin-top:15px}
+#killer-perfume #nk-preset-composition b{color:#d0dce1;font-weight:400}
+#killer-perfume .nk-ready-copy .nk-button{width:100%;margin-top:10px}
+#killer-perfume .nk-fine{font-size:11px;color:#87999f;line-height:1.8;margin-top:13px}
+#killer-perfume .nk-custom-top{display:flex;justify-content:space-between;align-items:center;gap:30px;margin-bottom:28px}
+#killer-perfume .nk-custom-top .nk-eyebrow{margin-bottom:15px;font-size:10px;color:#859fa9}
+#killer-perfume .nk-custom-top h3{font-size:28px;font-weight:400;letter-spacing:-.7px;line-height:1.3}
+#killer-perfume .nk-step-toggle{display:flex;gap:8px}
+#killer-perfume .nk-step-toggle button{background:none;border:1px solid #35464d;border-radius:30px;color:#8da5af;padding:11px 19px;font-size:13px;min-height:44px}
+#killer-perfume .nk-step-toggle button[aria-pressed=true]{background:#26343b;color:#ebf1f3;border-color:#6a8a98}
+#killer-perfume .nk-progress{background:#162026;border:1px solid #2d424c;border-radius:8px;padding:21px;max-width:610px;margin-bottom:30px}
+#killer-perfume .nk-progress-heading{display:flex;justify-content:space-between;align-items:center;gap:15px;font-size:13px;margin-bottom:17px;color:#b5c7cf}
+#killer-perfume .nk-progress-heading strong{color:#dfe8ec;font-size:16px;font-weight:400;white-space:nowrap}
+#killer-perfume .nk-slots{display:flex;gap:9px}
+#killer-perfume .nk-slot{flex:1;min-width:0;height:74px;border:1px dashed #49606b;border-radius:5px;background:#0a111666;position:relative;display:flex;align-items:center;justify-content:center;color:#7a929e;font-size:20px;padding:0;overflow:hidden}
+#killer-perfume .nk-slot img{height:100%;object-fit:cover;object-position:center 45%}
+#killer-perfume .nk-slot.is-filled{border:1px solid #608595}
+#killer-perfume .nk-slot.is-filled::after{content:"×";position:absolute;top:2px;right:3px;width:19px;height:19px;border-radius:50%;background:#13222ce8;font:15px/18px Arial,sans-serif;color:white}
+#killer-perfume .nk-slot:disabled{opacity:1;cursor:default}
+#killer-perfume .nk-slot:disabled::after{display:none}
+#killer-perfume .nk-carousel-heading{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:22px}
+#killer-perfume .nk-carousel-heading p{font-size:14px;color:#93a8b2}
+#killer-perfume .nk-carousel-controls{display:flex;gap:8px}
+#killer-perfume .nk-carousel-controls button{width:44px;height:44px;border:1px solid #3d515a;border-radius:50%;background:none;color:#c5d4db;font:23px Arial,sans-serif}
+#killer-perfume .nk-scent-track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:#4b656f #111b20;padding:3px 2px 19px;scroll-padding-left:2px}
+#killer-perfume .nk-scent-card{flex:0 0 calc((100% - 36px)/3);min-width:0;border:1px solid #2a3a41;border-radius:8px;background:#101a20;overflow:hidden;scroll-snap-align:start;transition:border-color .2s}
+#killer-perfume .nk-scent-card.is-picked{border-color:#aac1c9}
+#killer-perfume .nk-scent-photo{position:relative}
+#killer-perfume .nk-scent-photo img{height:320px;object-fit:cover;object-position:center 43%}
+#killer-perfume .nk-scent-number{position:absolute;top:15px;left:17px;font-size:11px;letter-spacing:1px;color:#d4dee1}
+#killer-perfume .nk-picked-badge{position:absolute;top:12px;right:12px;background:#d4e2e7;color:#1a3039;border-radius:20px;padding:5px 10px;font-size:11px}
+#killer-perfume .nk-scent-copy{padding:22px}
+#killer-perfume .nk-scent-brand{display:block;font-size:10px;letter-spacing:1.5px;color:#89a5b2;margin-bottom:10px;min-height:16px}
+#killer-perfume .nk-scent-copy h4{font-size:25px;font-weight:500;letter-spacing:-.7px;line-height:1.2;min-height:60px}
+#killer-perfume .nk-scent-copy p{font-size:14px;color:#a0b1ba;line-height:1.7;margin:11px 0 22px;min-height:48px}
+#killer-perfume .nk-scent-add{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 15px;min-height:49px;border:1px solid #7493a1;border-radius:4px;background:#233842;color:#e3edf1;font-size:13px}
+#killer-perfume .nk-scent-add>span{font-size:21px;font-weight:400}
+#killer-perfume .nk-scent-add:hover:not(:disabled){background:#3b5664}
+#killer-perfume .nk-catalog-note{font-size:12px;color:#91a5af;margin-top:15px}
+#killer-perfume .nk-custom-next{margin-top:27px;min-width:320px;max-width:420px}
+#killer-perfume .nk-gift-mirror{max-width:610px;padding:35px;border:1px solid #3d555f;border-radius:8px;background:radial-gradient(at 0% 0%,#31464e55,transparent),#141f25}
+#killer-perfume .nk-gift-mirror>span{color:var(--gold);font-size:24px;display:block;margin-bottom:22px}
+#killer-perfume .nk-gift-mirror h3{font-size:32px;line-height:1.2;font-weight:400;letter-spacing:-1px}
+#killer-perfume .nk-gift-mirror p{color:#a5b5bc;font-size:15px;margin:20px 0 26px}
+#killer-perfume .nk-selection-bar{display:flex;justify-content:space-between;align-items:center;gap:30px;background:#152724;border:1px solid #36574d;border-radius:8px;padding:22px 26px;margin-top:28px}
+#killer-perfume .nk-selection-bar>div{display:flex;align-items:center;gap:20px}
+#killer-perfume .nk-selection-check{display:flex;align-items:center;justify-content:center;width:40px;height:40px;background:#294a3f;color:#c6e9d6;border-radius:50%;font:18px Arial,sans-serif}
+#killer-perfume .nk-selection-bar strong{font-size:16px;font-weight:500}
+#killer-perfume .nk-selection-bar p{font-size:12px;color:#a1bcb1;margin-top:5px}
+#killer-perfume .nk-edit-link{border:0;border-bottom:1px solid #80968e;background:none;color:#c0d7cc;font-size:13px;padding:7px 0}
+#killer-perfume .nk-selection-bar .nk-button{min-height:49px;padding:13px 22px}
+#killer-perfume .nk-message{font-size:13px;color:#bdd2da;line-height:1.75;min-height:23px;margin-top:15px}
+#killer-perfume .nk-format-note{font-size:12px;line-height:1.8;color:#8298a2;margin-top:19px;max-width:760px}
+#killer-perfume .nk-statement{position:relative;min-height:720px;background:radial-gradient(ellipse at 80% 40%,#46101c66,transparent 70%),#170b0f;overflow:hidden}
+#killer-perfume .nk-statement-photo{position:absolute;inset:0 0 0 40%;}
+#killer-perfume .nk-statement-photo img{height:100%;object-fit:cover;object-position:50% 47%;mask-image:linear-gradient(90deg,transparent,black 32%)}
+#killer-perfume .nk-statement-content{position:relative;z-index:1;padding-block:100px;pointer-events:none}
+#killer-perfume .nk-statement .nk-eyebrow{color:#c59c94}
+#killer-perfume .nk-statement h2{font-size:clamp(56px,6.7vw,97px);line-height:.99;letter-spacing:-4px}
+#killer-perfume .nk-statement h2>span{color:#c3958f}
+#killer-perfume .nk-statement p:not(.nk-eyebrow){font-size:15px;line-height:1.9;margin-top:30px;color:#ceb6b6}
+#killer-perfume .nk-text-link{display:inline-flex;align-items:center;gap:45px;font-size:14px;border-bottom:1px solid #c39b8e;padding-bottom:13px;margin-top:24px;pointer-events:auto}
+#killer-perfume .nk-box-section{display:grid;grid-template-columns:1fr 1fr;gap:85px;align-items:center}
+#killer-perfume .nk-box-photo{position:relative}
+#killer-perfume .nk-box-photo img{height:580px;object-fit:cover;object-position:78% center;border-radius:4px}
+#killer-perfume .nk-box-photo>span{position:absolute;left:20px;right:20px;bottom:20px;font-size:9px;letter-spacing:2px;color:#ecdbcb}
+#killer-perfume .nk-box-copy h2{font-size:48px;line-height:1.1;letter-spacing:-2px}
+#killer-perfume .nk-box-copy>p:not(.nk-eyebrow){font-size:15px;color:#a3afb4;line-height:1.9;margin-top:24px}
+#killer-perfume .nk-volume{display:flex;gap:34px;align-items:center;margin-top:28px;border-block:1px solid var(--line);padding:22px 0}
+#killer-perfume .nk-volume>span{font-size:61px;line-height:1.1;font-weight:400;letter-spacing:-3px}
+#killer-perfume .nk-volume small{display:block;font-size:11px;letter-spacing:0;color:#9aaeb7;margin-top:10px}
+#killer-perfume .nk-volume i{font-size:28px;color:#6b7e87;font-style:normal}
+#killer-perfume .nk-box-copy .nk-button{margin-top:25px;font-size:14px}
+#killer-perfume .nk-process{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);padding:35px 0 75px;gap:60px}
+#killer-perfume .nk-process article>span{font-size:10px;color:#6f8a97;letter-spacing:1.5px}
+#killer-perfume .nk-process h3{font-size:28px;font-weight:400;letter-spacing:-.8px;margin:24px 0 16px}
+#killer-perfume .nk-process p{font-size:14px;line-height:1.85;color:#99aab3}
+#killer-perfume .nk-faq{display:grid;grid-template-columns:1fr 1.1fr;gap:80px;border-top:1px solid var(--line)}
+#killer-perfume .nk-questions details{border-bottom:1px solid var(--line)}
+#killer-perfume .nk-questions details:first-child{border-top:1px solid var(--line)}
+#killer-perfume .nk-questions summary{display:flex;justify-content:space-between;align-items:center;gap:30px;font-size:16px;padding:23px 0;line-height:1.6}
+#killer-perfume .nk-questions summary>span{font-size:25px;font-weight:400;color:#7f9aa6}
+#killer-perfume .nk-questions details p{font-size:15px;line-height:1.9;color:#9cacb4;padding-bottom:26px}
+#killer-perfume .nk-finale{text-align:center;position:relative;overflow:hidden;padding-block:80px 100px;border-top:1px solid var(--line)}
+#killer-perfume .nk-finale h2{font-size:clamp(58px,9.3vw,140px);letter-spacing:-5px;line-height:.98}
+#killer-perfume .nk-finale h2>span{color:#c1cfd4}
+#killer-perfume .nk-finale .nk-button{width:340px;max-width:100%;margin:36px auto 16px}
+#killer-perfume .nk-finale>p:last-child{font-size:12px;color:#81959f}
+#killer-perfume .nk-footer{display:flex;justify-content:space-between;align-items:center;gap:30px;padding-block:30px;border-top:1px solid var(--line)}
+#killer-perfume .nk-footer>span,#killer-perfume .nk-footer>a:last-child{font-size:12px;color:#8599a3}
+#killer-perfume .nk-footer>a:last-child{display:flex;align-items:center;gap:22px}
+#killer-perfume .nk-review{display:flex;justify-content:space-between;align-items:center;gap:40px;padding-top:24px;border-top:1px solid var(--line)}
+#killer-perfume .nk-review strong{font-size:12px;font-weight:400;color:#9fb0b8}
+#killer-perfume .nk-review p{font-size:11px;line-height:1.8;color:#81929a;margin-top:10px;max-width:800px}
+#killer-perfume .nk-variants{display:flex;gap:7px;flex-shrink:0}
+#killer-perfume .nk-variants button{border:1px solid #354750;background:none;border-radius:4px;min-height:44px;padding:10px 13px;font-size:11px;color:#9bb3bf}
+#killer-perfume .nk-variants button[aria-pressed=true]{background:#243640;color:#dcebf2;border-color:#7596a7}
+#killer-perfume .nk-dock{position:fixed;z-index:10;bottom:18px;right:24px;display:flex;gap:27px;align-items:center;justify-content:space-between;padding:12px 14px 12px 23px;background:#18242beF;border:1px solid #48606c;border-radius:9px;backdrop-filter:blur(18px);box-shadow:0 8px 35px #0006;max-width:calc(100% - 32px)}
+#killer-perfume .nk-dock>div{flex-shrink:0}
+#killer-perfume .nk-dock>div>span{display:block;font-size:10px;color:#a9bec9;line-height:1.5}
+#killer-perfume .nk-dock strong{display:block;font-size:23px;font-weight:500;letter-spacing:-.6px;line-height:1.4}
+#killer-perfume .nk-dock .nk-button{min-height:47px;font-size:13px;padding:13px 17px}
+#killer-perfume dialog{border:1px solid #3e4e57;border-radius:10px;background:#111b21;color:var(--ink);padding:38px;width:min(560px,calc(100% - 24px));max-height:calc(100dvh - 30px);overflow-y:auto;overscroll-behavior:contain}
+#killer-perfume dialog::backdrop{background:#04090cde;backdrop-filter:blur(6px)}
+#killer-perfume .nk-close{position:absolute;top:13px;right:13px;width:44px;height:44px;border:0;background:none;color:#e1eaf0;font:28px Arial,sans-serif}
+#killer-perfume dialog .nk-eyebrow{font-size:10px;letter-spacing:1.5px;margin:13px 28px 25px 0}
+#killer-perfume dialog h2{font-size:54px;letter-spacing:-2px;line-height:1}
+#killer-perfume .nk-order-intro{color:#a6b9c4;font-size:15px;line-height:1.85;margin:22px 0}
+#killer-perfume #nk-order-summary{background:#1a2a33;padding:18px;border:1px solid #304956;border-radius:5px;font-size:13px;line-height:1.9;color:#a8c0cc}
+#killer-perfume #nk-order-summary p+p{margin-top:16px}
+#killer-perfume #nk-order-summary b{font-weight:500;color:#e0eaf0}
+#killer-perfume #nk-order-summary strong{display:block;padding-top:15px;margin-top:15px;border-top:1px solid #41606d;color:white;font-size:17px;font-weight:500}
+#killer-perfume form>label{display:block;margin:22px 0 10px;font-size:14px;color:#c2d0d9}
+#killer-perfume form>input{display:block;width:100%;font-size:16px;background:#091117;border:1px solid #3e5866;color:#e0eaf1;padding:14px;min-height:54px;border-radius:5px}
+#killer-perfume form>input::placeholder{color:#819aaa}
+#killer-perfume form>small{display:block;margin-top:9px;font-size:11px;color:#89a4b4}
+#killer-perfume form>.nk-consent{display:flex;gap:11px;font-size:12px;line-height:1.8;color:#a3b9c6;margin:24px 0}
+#killer-perfume .nk-consent input{width:19px;height:19px;margin:2px 0 0;flex-shrink:0;accent-color:#83acbf}
+#killer-perfume .nk-consent button{padding:0;border:0;border-bottom:1px solid #789aa9;background:none;color:#c1d8e4;font-size:12px}
+#killer-perfume #nk-privacy{background:#20333e;font-size:13px;line-height:1.8;padding:16px;border-radius:4px;color:#bad0dc}
+#killer-perfume .nk-form-note{font-size:12px;color:#99b1c0;margin:19px 0}
+#killer-perfume #nk-form-error{color:#ffb5af;font-size:14px;margin:18px 0}
+#killer-perfume form>.nk-button{width:100%}
+#killer-perfume #nk-order-result{padding-block:35px}
+#killer-perfume #nk-order-result p{font-size:15px;line-height:1.9;color:#a9becb;margin-top:24px}
+#killer-perfume #nk-order-result .nk-button{margin-top:30px;width:100%}
+@media(max-width:1100px){#killer-perfume .nk-wrap{width:calc(100% - 64px)}#killer-perfume .nk-hero-layout{min-height:710px;grid-template-columns:1fr 1fr}#killer-perfume h1{font-size:78px;letter-spacing:-4px}#killer-perfume .nk-hero-stage{margin-right:-25px;min-height:580px}#killer-perfume .nk-hero-stage>img{height:590px}#killer-perfume .nk-ready-copy{padding:35px 28px}#killer-perfume .nk-ready-art{min-height:560px}#killer-perfume .nk-ready-art img{height:360px}#killer-perfume .nk-ready-art img:nth-child(2){margin-inline:-50px}#killer-perfume .nk-brand-line{font-size:13px;gap:23px;letter-spacing:2px}#killer-perfume .nk-box-section{gap:45px}#killer-perfume .nk-box-copy h2{font-size:39px}#killer-perfume .nk-scent-card{flex-basis:calc((100% - 18px)/2)}#killer-perfume .nk-process{gap:32px}#killer-perfume .nk-faq{gap:45px}#killer-perfume .nk-hero-switch button{padding-inline:10px;gap:10px;font-size:12px}}
+@media(max-width:700px){
+#killer-perfume{padding-bottom:calc(104px + env(safe-area-inset-bottom,0px))}
+#killer-perfume .nk-wrap{width:calc(100% - 40px)}#killer-perfume .nk-section{padding-block:65px}#killer-perfume h2{font-size:45px;letter-spacing:-2px;line-height:1.03}#killer-perfume .nk-eyebrow{font-size:10px;letter-spacing:1.4px;margin-bottom:22px}
+#killer-perfume .nk-header{height:76px;gap:16px}#killer-perfume .nk-logo{font-size:18px;gap:13px;letter-spacing:3px}#killer-perfume .nk-logo small{font-size:7px;letter-spacing:4px;margin-top:6px}#killer-perfume .nk-logo-mark{font-size:34px;letter-spacing:-10px;padding-right:12px}#killer-perfume .nk-logo-mark>span{font-size:24px;top:6px}#killer-perfume .nk-header nav{display:none}#killer-perfume .nk-header-cta{font-size:11px;gap:14px}
+#killer-perfume .nk-hero-layout{display:flex;flex-direction:column;min-height:0;padding-top:32px;padding-bottom:0;gap:0}#killer-perfume .nk-hero-copy{display:contents}#killer-perfume .nk-hero-copy .nk-eyebrow{order:0;font-size:9px;letter-spacing:1.6px;margin-bottom:21px}#killer-perfume h1{order:1;font-size:clamp(44px,12.5vw,68px);letter-spacing:-2.8px;line-height:.98;z-index:2}#killer-perfume .nk-hero-word{top:268px;font-size:128px;letter-spacing:-8px;left:-15px;right:-15px}#killer-perfume .nk-hero-stage{order:2;margin:-5px 0 0;min-height:0;height:340px;width:100%}#killer-perfume .nk-hero-stage>img{height:365px;width:290px;max-width:100%;object-fit:contain;mask-image:linear-gradient(0deg,transparent 0%,black 14%,black 89%,transparent 100%)}#killer-perfume .nk-stage-label{font-size:8px;right:0;top:40%;letter-spacing:1.2px}#killer-perfume .nk-product-caption{left:0;right:auto;bottom:8px;text-align:left}#killer-perfume .nk-product-caption>span{font-size:8px;letter-spacing:1.6px}#killer-perfume .nk-product-caption strong{font-size:16px;margin-top:5px}#killer-perfume .nk-hero-description{order:3;font-size:14px;line-height:1.7;margin-top:13px;color:#b2c2c8}#killer-perfume .nk-hero-description br{display:none}#killer-perfume .nk-hero-offer{order:4;max-width:none;width:100%;margin-top:20px}#killer-perfume .nk-offer-top{font-size:11px;gap:11px}#killer-perfume .nk-promo{font-size:10px;padding:5px 9px}#killer-perfume .nk-hero-price{font-size:33px;margin:14px 0 20px;gap:7px}#killer-perfume .nk-hero-price>span{font-size:25px}#killer-perfume .nk-hero-price small{font-size:11px}#killer-perfume .nk-hero-offer .nk-button{min-height:53px;font-size:14px;padding:15px 20px}#killer-perfume .nk-delivery{font-size:10px;line-height:1.8;margin-top:12px;max-width:330px}#killer-perfume .nk-hero-switch{order:5;display:flex;gap:0;width:100%;overflow-x:auto;scrollbar-width:none;margin-top:25px;padding:0}#killer-perfume .nk-hero-switch button{flex:0 0 auto;padding:17px 13px;font-size:10px;gap:8px;min-height:50px}#killer-perfume .nk-hero-switch button:first-child{padding-left:0}#killer-perfume .nk-hero-switch button>span{font-size:8px}
+#killer-perfume .nk-brand-line{justify-content:flex-start;font-size:10px;gap:22px;letter-spacing:1.5px;padding:21px 20px;white-space:nowrap}#killer-perfume .nk-brand-line i{font-size:9px}
+#killer-perfume .nk-section-head{display:block;margin-bottom:28px}#killer-perfume .nk-section-head>p{font-size:15px;line-height:1.8;margin-top:24px}#killer-perfume .nk-section-head>p br{display:none}#killer-perfume .nk-mode-switch{padding:5px;gap:5px;max-width:none;margin-bottom:23px}#killer-perfume .nk-mode-switch button{font-size:13px;min-height:66px;padding:12px 13px}#killer-perfume .nk-mode-switch button>span{font-size:10px;margin-top:5px}#killer-perfume .nk-mood-tabs{gap:0;justify-content:space-between;margin-bottom:22px}#killer-perfume .nk-mood-tabs button{font-size:11px;gap:6px;padding-block:10px;min-height:46px}#killer-perfume .nk-mood-tabs button span{font-size:8px}
+#killer-perfume .nk-ready-feature{display:flex;flex-direction:column;border-radius:8px}#killer-perfume .nk-ready-art{min-height:0;height:290px;padding-inline:10px}#killer-perfume .nk-ready-art::before{font-size:47px;top:18px;left:20px;letter-spacing:-3px}#killer-perfume .nk-ready-art img{height:265px;width:43%;border-radius:80px}#killer-perfume .nk-ready-art img:nth-child(1){transform:rotate(-11deg) translateX(4px) translateY(27px)}#killer-perfume .nk-ready-art img:nth-child(2){transform:translateY(5px);margin-inline:-42px}#killer-perfume .nk-ready-art img:nth-child(3){transform:rotate(11deg) translateX(-4px) translateY(27px)}#killer-perfume .nk-ready-art>span{font-size:8px;bottom:15px;left:20px;letter-spacing:1.3px}#killer-perfume .nk-ready-copy{padding:26px 23px}#killer-perfume .nk-ready-copy .nk-eyebrow{font-size:9px;margin-bottom:19px}#killer-perfume .nk-ready-copy h3{font-size:42px;letter-spacing:-2px;line-height:1.02}#killer-perfume .nk-ready-copy>p:not(.nk-eyebrow):not(.nk-fine){font-size:15px;margin-top:19px;line-height:1.85}#killer-perfume .nk-preset-meta{font-size:13px;padding-block:19px;margin-top:3px}#killer-perfume .nk-preset-details summary{font-size:12px;min-height:53px}#killer-perfume #nk-preset-composition{font-size:12px;line-height:1.9}#killer-perfume .nk-ready-copy .nk-button{font-size:14px;min-height:54px;padding:15px 18px}#killer-perfume .nk-fine{font-size:10px;margin-top:12px}
+#killer-perfume .nk-custom-top{display:block;margin-bottom:22px}#killer-perfume .nk-custom-top h3{font-size:25px;letter-spacing:-.7px;line-height:1.3}#killer-perfume .nk-custom-top .nk-eyebrow{font-size:9px;margin-bottom:14px}#killer-perfume .nk-step-toggle{margin-top:20px;gap:8px}#killer-perfume .nk-step-toggle button{padding:10px 18px;min-height:44px;font-size:12px}#killer-perfume .nk-progress{padding:16px;margin-bottom:23px;border-radius:7px}#killer-perfume .nk-progress-heading{font-size:12px;gap:10px;margin-bottom:14px}#killer-perfume .nk-progress-heading strong{font-size:14px}#killer-perfume .nk-slots{gap:6px}#killer-perfume .nk-slot{height:65px;border-radius:4px}#killer-perfume .nk-slot.is-filled::after{font-size:13px;width:17px;height:17px;line-height:17px;right:1px}
+#killer-perfume .nk-carousel-heading{gap:15px;margin-bottom:17px}#killer-perfume .nk-carousel-heading p{font-size:12px;line-height:1.7;max-width:190px}#killer-perfume .nk-carousel-controls{gap:6px}#killer-perfume .nk-carousel-controls button{width:42px;height:42px}#killer-perfume .nk-scent-track{gap:12px;margin-right:-20px;padding-right:20px;scroll-padding-left:2px}#killer-perfume .nk-scent-card{flex-basis:calc(100% - 34px);border-radius:7px}#killer-perfume .nk-scent-photo img{height:295px;object-position:center 40%}#killer-perfume .nk-scent-copy{padding:21px}#killer-perfume .nk-scent-brand{font-size:10px;margin-bottom:10px}#killer-perfume .nk-scent-copy h4{font-size:25px;min-height:0;line-height:1.2}#killer-perfume .nk-scent-copy p{font-size:14px;min-height:48px;line-height:1.7;margin-bottom:18px}#killer-perfume .nk-scent-add{min-height:49px;font-size:13px;padding:12px 14px}#killer-perfume .nk-catalog-note{font-size:11px;line-height:1.8}#killer-perfume .nk-custom-next{width:100%;min-width:0;font-size:14px;margin-top:23px}#killer-perfume .nk-gift-mirror{padding:26px 21px}#killer-perfume .nk-gift-mirror h3{font-size:28px}#killer-perfume .nk-gift-mirror p{font-size:14px}#killer-perfume .nk-gift-mirror .nk-button{font-size:13px;padding:14px 16px}
+#killer-perfume .nk-selection-bar{display:block;padding:21px;border-radius:7px;margin-top:23px}#killer-perfume .nk-selection-bar>div{gap:13px}#killer-perfume .nk-selection-bar>div:last-child{margin-top:21px;justify-content:space-between}#killer-perfume .nk-selection-bar strong{font-size:14px}#killer-perfume .nk-selection-bar p{font-size:11px}#killer-perfume .nk-selection-check{width:33px;height:33px;flex-shrink:0;font-size:15px}#killer-perfume .nk-selection-bar .nk-button{font-size:13px;min-height:47px;padding:13px 18px}#killer-perfume .nk-edit-link{font-size:12px}#killer-perfume .nk-message{font-size:12px;margin-top:15px}#killer-perfume .nk-format-note{font-size:11px;margin-top:16px;line-height:1.8}
+#killer-perfume .nk-statement{min-height:640px}#killer-perfume .nk-statement-photo{inset:0 0 0 25%}#killer-perfume .nk-statement-photo img{object-fit:cover;object-position:45% 50%;mask-image:linear-gradient(90deg,transparent,black 38%);opacity:.7}#killer-perfume .nk-statement-content{padding-block:58px}#killer-perfume .nk-statement .nk-eyebrow{font-size:9px;letter-spacing:1px;position:relative;z-index:1}#killer-perfume .nk-statement h2{font-size:55px;letter-spacing:-2.4px;line-height:1.02;text-shadow:0 2px 30px #11010799}#killer-perfume .nk-statement p:not(.nk-eyebrow){font-size:14px;margin-top:28px;line-height:1.9}#killer-perfume .nk-text-link{font-size:13px;gap:28px;margin-top:24px}
+#killer-perfume .nk-box-section{display:flex;flex-direction:column;gap:32px;align-items:stretch}#killer-perfume .nk-box-photo img{height:300px;object-position:77% center}#killer-perfume .nk-box-photo>span{font-size:7px;letter-spacing:1.2px;left:16px;bottom:15px}#killer-perfume .nk-box-copy h2{font-size:38px;letter-spacing:-1.7px;line-height:1.08}#killer-perfume .nk-box-copy>p:not(.nk-eyebrow){font-size:15px;line-height:1.85;margin-top:20px}#killer-perfume .nk-volume{gap:29px;padding-block:22px;margin-top:25px}#killer-perfume .nk-volume>span{font-size:60px}#killer-perfume .nk-volume small{font-size:11px}#killer-perfume .nk-box-copy .nk-button{font-size:13px;min-height:55px;padding-inline:18px}
+#killer-perfume .nk-process{display:block;padding:8px 0 38px}#killer-perfume .nk-process article{padding-block:25px;border-bottom:1px solid var(--line)}#killer-perfume .nk-process article>span{font-size:9px}#killer-perfume .nk-process h3{font-size:26px;margin:16px 0 12px}#killer-perfume .nk-process p{font-size:15px;line-height:1.85}
+#killer-perfume .nk-faq{display:block;border-top:0;padding-top:35px}#killer-perfume .nk-questions{margin-top:30px}#killer-perfume .nk-questions summary{font-size:14px;line-height:1.7;padding-block:21px;gap:20px}#killer-perfume .nk-questions details p{font-size:14px;line-height:1.85;padding-bottom:23px}#killer-perfume .nk-finale{padding-block:58px 65px}#killer-perfume .nk-finale .nk-eyebrow{font-size:9px;letter-spacing:1.1px}#killer-perfume .nk-finale h2{font-size:clamp(31px,9.6vw,58px);letter-spacing:-1.8px;line-height:1.02}#killer-perfume .nk-finale .nk-button{margin-top:29px;width:100%;font-size:14px}#killer-perfume .nk-finale>p:last-child{font-size:11px}
+#killer-perfume .nk-footer{padding-block:28px;gap:20px}#killer-perfume .nk-footer>span{font-size:11px}#killer-perfume .nk-footer>a:last-child{display:none}#killer-perfume .nk-review{display:block;padding-top:21px}#killer-perfume .nk-review p{font-size:10px;line-height:1.85}#killer-perfume .nk-review strong{font-size:11px}#killer-perfume .nk-variants{margin-top:20px;gap:8px}#killer-perfume .nk-variants button{flex:1;font-size:11px}
+#killer-perfume .nk-dock{bottom:0;left:0;right:0;max-width:none;border-radius:0;border-inline:0;border-bottom:0;padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px));gap:15px}#killer-perfume .nk-dock>div>span{font-size:10px}#killer-perfume .nk-dock strong{font-size:23px}#killer-perfume .nk-dock .nk-button{min-height:47px;font-size:12px;padding:13px 16px;gap:15px;min-width:157px}
+#killer-perfume dialog{width:calc(100% - 16px);padding:28px 23px;max-height:calc(100dvh - 16px);border-radius:8px}#killer-perfume dialog h2{font-size:45px}#killer-perfume dialog .nk-eyebrow{font-size:9px;margin-top:16px}#killer-perfume .nk-order-intro{font-size:14px;line-height:1.8}#killer-perfume #nk-order-summary{font-size:12px;padding:15px}#killer-perfume form>label{font-size:13px}#killer-perfume form>.nk-consent{font-size:11px}#killer-perfume .nk-consent button{font-size:11px}#killer-perfume form>.nk-button{font-size:14px}
+}
+@media(max-width:360px){#killer-perfume .nk-header-cta{font-size:10px;gap:10px}#killer-perfume h1{font-size:41px;letter-spacing:-2.5px}#killer-perfume .nk-hero-price{font-size:30px}#killer-perfume .nk-hero-price small{font-size:10px}#killer-perfume .nk-mood-tabs button{font-size:10px;gap:4px}#killer-perfume .nk-mood-tabs button>span{display:none}#killer-perfume .nk-mode-switch button{font-size:12px;padding-inline:11px}#killer-perfume .nk-ready-copy{padding:24px 20px}#killer-perfume .nk-ready-copy h3{font-size:38px}#killer-perfume .nk-scent-card{flex-basis:calc(100% - 25px)}#killer-perfume .nk-scent-copy{padding:19px}#killer-perfume .nk-scent-copy h4{font-size:23px}#killer-perfume .nk-statement h2{font-size:47px}#killer-perfume .nk-box-copy h2{font-size:33px}#killer-perfume .nk-dock{padding-inline:14px;gap:10px}#killer-perfume .nk-dock .nk-button{font-size:11px;min-width:140px;padding-inline:13px}#killer-perfume .nk-dock>div>span{font-size:9px}#killer-perfume .nk-dock strong{font-size:21px}}
+@media(prefers-reduced-motion:reduce){#killer-perfume *,#killer-perfume *::before,#killer-perfume *::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+@media(max-width:700px){#killer-perfume .nk-hero-stage{height:290px}#killer-perfume .nk-hero-stage>img{height:315px}#killer-perfume .nk-hero-description br::after{content:" "}}

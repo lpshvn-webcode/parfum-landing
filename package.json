@@ -1,0 +1,10 @@
+{
+  "name": "killer-perfume-landing",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "test": "node scripts/test-noir.cjs"
+  }
+}
