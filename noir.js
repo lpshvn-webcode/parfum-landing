@@ -31,7 +31,11 @@
     {name:'Феромон мужской',group:'men',image:'pheromone-men.png',sound:'Зависит от конкретной формулы',notes:'Состав зависит от формулы продукта'},
     {name:'Louis Vuitton Imagination',group:'men',image:'lv-imagination.png',sound:'Свежее, цитрусовое, пряное',notes:'Амброксан, китайский чёрный чай, нероли, имбирь, корица, сицилийский кедрат'},
     {name:'Louis Vuitton Symphony',group:'men',image:'lv-symphony.png',sound:'Яркое, цитрусовое, свежее',notes:'Грейпфрут, бергамот, апельсин, имбирь'},
-    {name:'Bvlgari Tygar',group:'men',image:'bvlgari-tygar.png',sound:'Яркое, свежее, цитрусово-древесное',notes:'Грейпфрут и амбровый аккорд'}
+    {name:'Bvlgari Tygar',group:'men',image:'bvlgari-tygar.png',sound:'Яркое, свежее, цитрусово-древесное',notes:'Грейпфрут и амбровый аккорд'},
+    {name:'Clive Christian Blond Amber',group:'men',image:'clive-blond-amber.png',sound:'Тёплое, амбровое, пряно-древесное',notes:'Ром, сухофрукты, табак, бобы тонка, мирра, пачули'},
+    {name:'Arabian Oud Madawi',group:'men',image:'arabian-oud-madawi.png',sound:'Сладкое, фруктово-цветочное, мускусное',notes:'Ананасовый цвет, персик, яблоневый цвет, пачули, мускус'},
+    {name:'Orto Parisi Megamare',group:'men',image:'orto-parisi-megamare.png',sound:'Морское, солёное, минеральное',notes:'Морские аккорды, соль, амбра, мускус'},
+    {name:'Hormone Parisi Gaba',group:'men',image:'hormone-parisi-gaba.png',sound:'Мягкое, мускусное, амбровое',notes:'Мускус, амбра, древесные и минеральные оттенки'}
   ];
   const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const params=new URLSearchParams(location.search);
