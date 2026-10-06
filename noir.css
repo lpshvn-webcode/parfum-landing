@@ -363,7 +363,7 @@
 
 #killer-perfume .nk-stack{padding-block:96px 40px}
 #killer-perfume .nk-stack-list{display:block;padding-bottom:12px}
-#killer-perfume .nk-stack-card{--tint:#8faeb6;--glow:#5e87901f;--d:0;--s:.5;position:sticky;top:calc(24px + var(--i,0)*20px);margin-bottom:24px;min-height:340px;padding:30px 36px 36px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(145deg,#151d20,#0e1315);border:1px solid #293438;border-radius:12px;overflow:hidden;transform-origin:50% 0;transform:scale(calc(1 - var(--d)*.05));transition:border-color .5s,box-shadow .5s;will-change:transform}
+#killer-perfume .nk-stack-card{--tint:#8faeb6;--glow:#5e87901f;--d:0;--s:.5;position:sticky;top:calc(24px + var(--i,0)*20px);margin-bottom:24px;min-height:340px;padding:30px 36px 36px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(145deg,#151d20,#0e1315);border:1px solid #293438;border-radius:12px;overflow:hidden;transform-origin:50% 0;transform:translate3d(0,var(--ty,0px),0) scale(calc(1 - var(--d)*.05));transition:border-color .5s,box-shadow .5s;will-change:transform}
 #killer-perfume .nk-stack-card:last-child{margin-bottom:0}
 #killer-perfume .nk-stack-card[data-tone=gold]{--tint:#d5b98b;--glow:#80521d3a}
 #killer-perfume .nk-stack-card[data-tone=wine]{--tint:#c3958f;--glow:#6d0f2440}

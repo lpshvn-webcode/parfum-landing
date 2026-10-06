@@ -144,7 +144,8 @@
   const stackCards=$$('.nk-stack-card');
   if(stackCards.length){
     root.classList.add('nk-js');
-    if(CSS.supports('overflow','clip')){for(let node=root.parentElement;node&&node!==document.documentElement;node=node.parentElement){const style=getComputedStyle(node);if(/hidden|auto|scroll/.test(style.overflowX+' '+style.overflowY))node.style.setProperty('overflow','clip','important');}}
+    const unlockSticky=()=>{const value=CSS.supports('overflow','clip')?'clip':'visible';for(let node=root.parentElement;node&&node!==document.documentElement;node=node.parentElement){const style=getComputedStyle(node);if(/hidden|auto|scroll/.test(style.overflowX+' '+style.overflowY))node.style.setProperty('overflow',value,'important');}};
+    unlockSticky();addEventListener('load',()=>{unlockSticky();setTimeout(unlockSticky,1200);});
     const stackList=$('.nk-stack-list');
     stackCards.forEach((card,index)=>{
       card.style.setProperty('--i',index);
@@ -165,20 +166,37 @@
       const seen=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting&&!entry.target.classList.contains('is-seen')){entry.target.classList.add('is-seen');countUp(entry.target);seen.unobserve(entry.target);}}),{threshold:.35});
       stackCards.forEach(card=>seen.observe(card));
     }else stackCards.forEach(card=>card.classList.add('is-seen'));
-    let stackTick=false,activeStack=-1;
+    let stackTick=false,activeStack=-1,jsSticky=false,brokenFrames=0;
     const stackTops=()=>stackCards.map(card=>parseFloat(getComputedStyle(card).top)||0);
     const updateStack=()=>{
       stackTick=false;
-      const rects=stackCards.map(card=>card.getBoundingClientRect()),tops=stackTops();
-      const progress=rects.map((rect,index)=>Math.min(1,Math.max(0,1-(rect.top-tops[index])/Math.max(rect.height,1))));
+      const tops=stackTops(),listRect=stackList.getBoundingClientRect(),heights=stackCards.map(card=>card.offsetHeight),gap=parseFloat(getComputedStyle(stackCards[0]).marginBottom)||0;
+      const rects=stackCards.map(card=>card.getBoundingClientRect());
+      if(!jsSticky&&!reduced()){
+        const broken=rects.some((rect,index)=>rect.top<tops[index]-4&&listRect.bottom-rect.bottom>60);
+        brokenFrames=broken?brokenFrames+1:0;
+        if(brokenFrames>=3){jsSticky=true;root.dataset.sticky='js';}
+      }
+      let layout=rects.map(rect=>({top:rect.top,height:rect.height,bottom:rect.bottom}));
+      if(jsSticky){
+        let natural=listRect.top;
+        layout=stackCards.map((card,index)=>{
+          const start=natural;natural+=heights[index]+gap;
+          const limit=Math.max(0,listRect.bottom-12-(start+heights[index]+(index<stackCards.length-1?gap:0)));
+          const shift=Math.min(Math.max(tops[index]-start,0),limit);
+          card.style.setProperty('--ty',shift.toFixed(1)+'px');
+          return {top:start+shift,height:heights[index],bottom:start+shift+heights[index]};
+        });
+      }
+      const progress=layout.map((item,index)=>Math.min(1,Math.max(0,1-(item.top-tops[index])/Math.max(item.height,1))));
       let active=0;
       stackCards.forEach((card,index)=>{
         const depth=reduced()?0:progress.slice(index+1).reduce((sum,value)=>sum+value,0);
         card.style.setProperty('--d',depth.toFixed(3));
-        card.style.setProperty('--s',Math.min(1,Math.max(0,(innerHeight-rects[index].top)/(innerHeight+rects[index].height))).toFixed(3));
+        card.style.setProperty('--s',Math.min(1,Math.max(0,(innerHeight-layout[index].top)/(innerHeight+layout[index].height))).toFixed(3));
         if(index>0&&progress[index]>=.6)active=index;
       });
-      const inView=rects[0].top<innerHeight*.7&&rects[stackCards.length-1].bottom>0;
+      const inView=layout[0].top<innerHeight*.7&&layout[stackCards.length-1].bottom>0;
       stackCards.forEach((card,index)=>card.classList.toggle('is-active',inView&&index===active));
       if(inView&&active!==activeStack){activeStack=active;$$('.nk-stack-nav button').forEach(button=>button.setAttribute('aria-current',String(Number(button.dataset.stack)===active)));}
     };
