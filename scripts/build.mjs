@@ -3,9 +3,10 @@ const root=new URL('../',import.meta.url);
 const [html,css,js]=await Promise.all(['noir.html','noir.css','noir.js'].map(file=>readFile(new URL(file,root),'utf8')));
 const fragment=html.split('<!-- KP:START -->')[1].split('<!-- KP:END -->')[0].trim();
 const catalogAssets=['amouage-guidance.png','miss-dior.png','good-girl-blush.png','good-girl-gone-bad.png','lattafa-yara.png','ange-ou-demon.png','so-sexy.png','modern-princess.png','killer.png','musk-kashmir.png','aqua-blue.png','creed-absolu-aventus.png','clive-hedonistic.png','dior-cologne.png','pheromone-men.png','lv-imagination.png','lv-symphony.png','bvlgari-tygar.png'].map(file=>`catalog/${file}`);
-const assets=['campaign.webp','imagination.webp','tygar.webp','hedonistic.webp','absolu.webp','pheramone.webp','manrope-400.ttf','manrope-600.ttf',...catalogAssets];
+const assets=['campaign.webp','imagination.webp','tygar.webp','hedonistic.webp','absolu.webp','pheramone.webp','manrope-400.ttf','manrope-600.ttf','certs/cert-1.webp','certs/cert-2.webp','certs/cert-3.webp','certs/cert-4.webp',...catalogAssets];
 await mkdir(new URL('dist/assets/',root),{recursive:true});
 await mkdir(new URL('dist/assets/catalog/',root),{recursive:true});
+await mkdir(new URL('dist/assets/certs/',root),{recursive:true});
 const inlineAssets=new Map();
 for(const file of assets){
   const data=await readFile(new URL(`assets/${file}`,root));
