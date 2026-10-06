@@ -33,11 +33,6 @@
     {name:'Louis Vuitton Symphony',group:'men',image:'lv-symphony.png',sound:'Яркое, цитрусовое, свежее',notes:'Грейпфрут, бергамот, апельсин, имбирь'},
     {name:'Bvlgari Tygar',group:'men',image:'bvlgari-tygar.png',sound:'Яркое, свежее, цитрусово-древесное',notes:'Грейпфрут и амбровый аккорд'}
   ];
-  const mixes={
-    day:{eyebrow:'01 / НА КАЖДЫЙ ДЕНЬ',title:'ЛЁГКО. ЧИСТО. СОБРАННО.',text:'Свежие и цитрусовые направления для города, работы и планов без расписания.',vials:['Свежесть','Цитрус','Чистота','Дерево','Фаворит']},
-    night:{eyebrow:'02 / ПОСЛЕ ЗАКАТА',title:'ГЛУБЖЕ. ТЕПЛЕЕ. БЛИЖЕ.',text:'Табачные, древесные и сладкие акценты для свиданий и долгих вечеров.',vials:['Тепло','Специи','Табак','Амбра','Фаворит']},
-    signature:{eyebrow:'03 / ПРОИЗВЕСТИ ВПЕЧАТЛЕНИЕ',title:'ЯРКО. ДОРОГО. УЗНАВАЕМО.',text:'Контрастное сочетание, которое подчёркивает характер и остаётся в памяти.',vials:['Акцент','Глубина','Шлейф','Контраст','Фаворит']}
-  };
   const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const params=new URLSearchParams(location.search);
   let offer=['5','10'].includes(params.get('offer'))?params.get('offer'):(root.dataset.offer==='5'?'5':'10');
@@ -62,11 +57,6 @@
     stopHeroShow();if(!mobileHero.matches||reduced()||!heroVisible||document.hidden)return;
     heroTimer=setInterval(()=>setHero(heroCatalog[(heroIndex+1)%heroCatalog.length].id),4800);
   }
-  function renderMix(key){
-    const mix=mixes[key]||mixes.day;
-    $$('[data-mix]').forEach(button=>button.setAttribute('aria-selected',String(button.dataset.mix===key)));
-    $('#nk-mix-output').innerHTML=`<span>${escape(mix.eyebrow)}</span><h4>${escape(mix.title)}</h4><p>${escape(mix.text)}</p><div>${mix.vials.map((vial,index)=>`<i><b>0${index+1}</b>${escape(vial)}</i>`).join('')}</div>`;
-  }
   function renderCatalog(){
     $('#nk-fragrance-grid').innerHTML=fragrances.map((item,index)=>{const photo=item.image.startsWith('data:')?item.image:`./assets/catalog/${item.image}`;return `<button type="button" class="nk-fragrance-card" data-group="${item.group}" aria-expanded="false"><span class="nk-fragrance-visual"><img src="${photo}" width="720" height="720" loading="${index<3?'eager':'lazy'}" alt="Флакон ${escape(item.name)}"><span class="nk-fragrance-number">${String(index+1).padStart(2,'0')}</span></span><span class="nk-fragrance-copy"><small>${item.group==='men'?'МУЖСКОЙ':'ЖЕНСКИЙ / УНИСЕКС'}</small><h4>${escape(item.name)}</h4><p>${escape(item.sound)}</p><span class="nk-fragrance-more">Звучание и ноты <b>+</b></span><span class="nk-fragrance-details"><strong>Основные ноты</strong>${escape(item.notes)}</span></span></button>`;}).join('');
   }
@@ -88,6 +78,7 @@
     $$('[data-offer-choice]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.offerChoice===offer)));
     $('#nk-offer-description').textContent=offer==='10'?'До 10 ароматов · два сета':'До 5 ароматов · два одинаковых сета';
     $('#nk-box-offer').textContent=offer==='10'?'Во втором сете можно выбрать другое сочетание.':'Подарочный сет полностью повторяет первый.';
+    $('#nk-stack-gift').textContent=offer==='10'?'Во втором сете можно выбрать другое сочетание. Доставка по Казахстану бесплатная.':'Второй сет повторяет первый и идёт в подарок. Доставка по Казахстану бесплатная.';
     $('#nk-faq-offer').textContent=offer==='10'?'Ты получаешь два сета по 50 мл за 50 000 ₸. Состав подарочного сета можно подобрать отдельно.':'Ты выбираешь до 5 ароматов. Второй сет повторяет первый и идёт в подарок. Всего 100 мл за 50 000 ₸.';
     if(updateUrl){const url=new URL(location.href);url.searchParams.set('offer',offer);history.replaceState(null,'',url);}
   }
@@ -95,7 +86,6 @@
     const button=event.target.closest('button');
     if(button?.dataset.hero){setHero(button.dataset.hero);startHeroShow();return;}
     if(button?.dataset.offerChoice){setOffer(button.dataset.offerChoice);return;}
-    if(button?.dataset.mix){renderMix(button.dataset.mix);return;}
     if(button?.dataset.filter){filterCatalog(button.dataset.filter);return;}
     if(button?.id==='nk-show-more'){catalogExpanded=!catalogExpanded;updateCatalogVisibility();return;}
     const card=event.target.closest('.nk-fragrance-card');
@@ -103,6 +93,27 @@
     const anchor=event.target.closest('a[href^="#kp-"]');
     if(anchor){const target=$(anchor.getAttribute('href'));if(target){event.preventDefault();target.scrollIntoView({behavior:reduced()?'instant':'smooth',block:'start'});}}
   });
+  const stackCards=$$('.nk-stack-card');
+  if(stackCards.length){
+    stackCards.forEach((card,index)=>card.style.setProperty('--i',index));
+    let stackTick=false;
+    const updateStack=()=>{
+      stackTick=false;
+      const rects=stackCards.map(card=>card.getBoundingClientRect());
+      const tops=stackCards.map(card=>parseFloat(getComputedStyle(card).top)||0);
+      const progress=rects.map((rect,index)=>Math.min(1,Math.max(0,1-(rect.top-tops[index])/Math.max(rect.height,1))));
+      let active=0;
+      stackCards.forEach((card,index)=>{
+        const depth=reduced()?0:progress.slice(index+1).reduce((sum,value)=>sum+value,0);
+        card.style.setProperty('--d',depth.toFixed(3));
+        if(index>0&&progress[index]>=.6)active=index;
+      });
+      const inView=rects[0].top<innerHeight*.7&&rects[stackCards.length-1].bottom>0;
+      stackCards.forEach((card,index)=>card.classList.toggle('is-active',inView&&index===active));
+    };
+    const requestStack=()=>{if(!stackTick){stackTick=true;requestAnimationFrame(updateStack);}};
+    addEventListener('scroll',requestStack,{passive:true});addEventListener('resize',requestStack);updateStack();
+  }
   heroCatalog.slice(1).forEach(item=>{const image=new Image();image.src=item.photo;});
   if('IntersectionObserver'in window){
     const observer=new IntersectionObserver(entries=>{heroVisible=entries[0]?.isIntersecting??true;heroVisible?startHeroShow():stopHeroShow();},{threshold:.15});
@@ -111,5 +122,5 @@
   const handleViewport=()=>startHeroShow();
   if(mobileHero.addEventListener)mobileHero.addEventListener('change',handleViewport);else mobileHero.addListener(handleViewport);
   document.addEventListener('visibilitychange',handleViewport);
-  renderCatalog();renderMix('day');filterCatalog('all');setOffer(offer,false);commitHero(heroCatalog[0].id);startHeroShow();
+  renderCatalog();filterCatalog('all');setOffer(offer,false);commitHero(heroCatalog[0].id);startHeroShow();
 })();
