@@ -73,7 +73,12 @@
     more.hidden=!remaining;more.setAttribute('aria-expanded',String(catalogExpanded));
     more.innerHTML=catalogExpanded?'Скрыть каталог <span>↑</span>':`Показать ещё <span>${remaining}</span>`;
   }
-  const certificates=window.KP_CERTS||[{src:'',title:'Сертификат 01'},{src:'',title:'Сертификат 02'},{src:'',title:'Сертификат 03'},{src:'',title:'Сертификат 04'}];
+  const certificates=window.KP_CERTS||[
+    {src:'./assets/certs/cert-1.webp',title:'ISO 9001 / ISO 14001 · Swiss Safety Center'},
+    {src:'./assets/certs/cert-2.webp',title:'Сертификат происхождения · Швейцария'},
+    {src:'./assets/certs/cert-3.webp',title:'Сертификат анализа · Luzi'},
+    {src:'./assets/certs/cert-4.webp',title:'Сертификат происхождения · Великобритания'}
+  ];
   let certIndex=0;
   function renderCerts(){
     $('#nk-proof-track').innerHTML=certificates.map((cert,index)=>cert.src?`<button type="button" class="nk-cert" data-cert="${index}" aria-label="Открыть: ${escape(cert.title)}"><img src="${escape(cert.src)}" loading="lazy" alt="${escape(cert.title)}"><span class="nk-cert-zoom" aria-hidden="true">+</span></button>`:`<div class="nk-cert" aria-disabled="true"><span class="nk-cert-empty"><b>${escape(cert.title)}</b>СКОРО ЗДЕСЬ</span></div>`).join('');
