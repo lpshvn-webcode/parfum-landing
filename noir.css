@@ -485,3 +485,59 @@
 #killer-perfume .nk-contact-list .nk-social a:hover{background:#d8e3e5;color:#111619;transform:translateY(-2px)}
 @media(max-width:900px){#killer-perfume .nk-contacts{grid-template-columns:1fr;gap:36px}#killer-perfume .nk-contact-list{grid-template-columns:1fr 1fr}}
 @media(max-width:700px){#killer-perfume .nk-contacts{padding-block:56px 44px;gap:28px}#killer-perfume .nk-contact-list{grid-template-columns:1fr;gap:28px}#killer-perfume .nk-contact-list>div>span{margin-bottom:10px}#killer-perfume .nk-contact-list>div>a{padding-block:8px}}
+
+/* ===== motion ===== */
+@keyframes nkUp{from{opacity:0;transform:translate3d(0,28px,0)}}
+@keyframes nkDown{from{opacity:0;transform:translate3d(0,-18px,0)}}
+@keyframes nkLine{from{opacity:0;transform:translate3d(0,42%,0);filter:blur(10px)}}
+@keyframes nkWord{from{opacity:0;transform:translate3d(0,.55em,0);filter:blur(8px)}}
+@keyframes nkStage{from{opacity:0;transform:scale(.92) translate3d(0,26px,0);filter:blur(12px)}}
+@keyframes nkFloat{0%,100%{translate:0 0}50%{translate:0 -12px}}
+@keyframes nkBreathe{0%,100%{transform:scale(.95);opacity:.75}50%{transform:scale(1.07);opacity:1}}
+@keyframes nkRing{0%{box-shadow:0 0 0 0 #f1f0eb66}70%,100%{box-shadow:0 0 0 14px #f1f0eb00}}
+@keyframes nkDockIn{from{opacity:0;transform:translate3d(0,120%,0)}}
+@keyframes nkFaq{from{opacity:0;transform:translate3d(0,-8px,0)}}
+#killer-perfume{--tone-glow:#8fb6c02e}
+#killer-perfume[data-tone=gold]{--tone-glow:#dca55e2a}
+#killer-perfume[data-tone=wine]{--tone-glow:#c7405e30}
+#killer-perfume .nk-header{animation:nkDown .8s cubic-bezier(.2,.7,.2,1) backwards}
+#killer-perfume .nk-hero-copy .nk-eyebrow{animation:nkUp .8s cubic-bezier(.2,.7,.2,1) .12s backwards}
+#killer-perfume .nk-ln{display:inline-block;animation:nkLine 1.05s cubic-bezier(.2,.7,.2,1) .24s backwards}
+#killer-perfume h1>span.nk-ln:first-child{color:inherit}
+#killer-perfume h1>span.nk-ln:last-child{animation-delay:.4s}
+#killer-perfume .nk-hero-description{animation:nkUp .9s cubic-bezier(.2,.7,.2,1) .62s backwards}
+#killer-perfume .nk-hero-offer{animation:nkUp .9s cubic-bezier(.2,.7,.2,1) .78s backwards}
+#killer-perfume .nk-hero-switch{animation:nkFade .9s ease 1.05s backwards}
+#killer-perfume .nk-hero-stage{animation:nkStage 1.3s cubic-bezier(.2,.7,.2,1) .18s backwards;transform:translate3d(var(--tx,0px),var(--ty,0px),0);transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+#killer-perfume .nk-hero-word{animation:nkFade 2.4s ease .3s backwards;transform:translate3d(0,var(--wy,0px),0)}
+#killer-perfume .nk-hero-stage>img{animation:nkFloat 7s ease-in-out 1.4s infinite}
+#killer-perfume .nk-hero-stage::before{animation:nkBreathe 6s ease-in-out infinite}
+#killer-perfume .nk-hero::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(560px circle at var(--mx,68%) var(--my,45%),var(--tone-glow),transparent 62%)}
+#killer-perfume .nk-dock{animation:nkDockIn .9s cubic-bezier(.2,.7,.2,1) 1.3s backwards}
+#killer-perfume .nk-dock .nk-button{animation:nkRing 3.4s ease-out 2.6s infinite}
+#killer-perfume :is(.nk-button,.nk-header-cta,.nk-text-link,.nk-footer-cta){position:relative;overflow:hidden;isolation:isolate}
+#killer-perfume :is(.nk-button,.nk-header-cta,.nk-text-link,.nk-footer-cta)::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(105deg,transparent 35%,#0000001f 50%,transparent 65%);transform:translateX(-120%);transition:transform .75s cubic-bezier(.2,.7,.2,1);pointer-events:none}
+#killer-perfume :is(.nk-button,.nk-header-cta,.nk-text-link,.nk-footer-cta):hover::before{transform:translateX(120%)}
+#killer-perfume :is(.nk-button,.nk-header-cta,.nk-text-link,.nk-footer-cta) .nk-arrow{transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+#killer-perfume :is(.nk-button,.nk-header-cta,.nk-text-link,.nk-footer-cta):hover .nk-arrow{transform:translate(4px,-4px)}
+#killer-perfume :is(.nk-button,.nk-header-cta,.nk-text-link,.nk-footer-cta):active{transform:scale(.97)}
+#killer-perfume .nk-scrollbar{position:fixed;z-index:25;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),#f1f0eb);transform:scaleX(var(--sp,0));transform-origin:0 50%;pointer-events:none}
+#killer-perfume.nk-motion .nk-rv{opacity:0}
+#killer-perfume.nk-motion .nk-rv.is-in{opacity:1;animation:nkUp .95s cubic-bezier(.2,.7,.2,1) var(--rd,0ms) backwards}
+#killer-perfume.nk-motion .nk-split .nk-w{display:inline-block;font-weight:inherit;opacity:0}
+#killer-perfume.nk-motion .nk-split.is-in .nk-w{opacity:1;animation:nkWord 1s cubic-bezier(.2,.7,.2,1) calc(var(--wi,0)*55ms) backwards}
+#killer-perfume.nk-motion .nk-statement-photo{overflow:hidden}
+#killer-perfume .nk-box-photo{overflow:hidden;border-radius:4px}
+#killer-perfume.nk-motion .nk-statement-photo img,#killer-perfume.nk-motion .nk-box-photo img{transform:translate3d(0,var(--py,0px),0) scale(1.14);will-change:transform}
+#killer-perfume .nk-process article{position:relative}
+#killer-perfume.nk-motion .nk-process article::before{content:"";position:absolute;left:0;right:0;top:-35px;height:1px;background:#c9d4d7;transform:scaleX(0);transform-origin:0 50%}
+#killer-perfume.nk-motion .nk-process article.is-in::before{transform:scaleX(1);transition:transform 1.4s cubic-bezier(.2,.7,.2,1) .25s}
+#killer-perfume .nk-fragrance-visual img{transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+#killer-perfume .nk-fragrance-card:hover .nk-fragrance-visual img{transform:scale(1.08) translateY(-4px)}
+#killer-perfume .nk-questions summary>span{transition:transform .45s cubic-bezier(.2,.7,.2,1);display:inline-block}
+#killer-perfume .nk-questions details[open] summary>span{transform:rotate(45deg)}
+#killer-perfume .nk-questions details[open]>p{animation:nkFaq .55s cubic-bezier(.2,.7,.2,1) backwards}
+#killer-perfume .nk-social svg{transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+#killer-perfume .nk-social a:hover svg{transform:rotate(-10deg) scale(1.12)}
+@media(max-width:700px){#killer-perfume.nk-motion .nk-process article::before{display:none}}
+@media(prefers-reduced-motion:reduce){#killer-perfume .nk-rv,#killer-perfume .nk-split .nk-w{opacity:1!important}#killer-perfume .nk-hero-stage{transform:none!important}}
