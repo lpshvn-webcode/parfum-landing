@@ -340,3 +340,41 @@
 #killer-perfume .nk-statement p:not(.nk-eyebrow){font-size:14px;margin-top:23px;line-height:1.8}
 #killer-perfume .nk-statement .nk-text-link{margin-top:25px}
 }
+
+@keyframes nk-brand-marquee{to{transform:translateX(-50%)}}
+#killer-perfume .nk-brand-line{display:block;padding:0;background:#0c1113;overflow:hidden}
+#killer-perfume .nk-brand-track{display:flex;width:max-content;animation:nk-brand-marquee 34s linear infinite;will-change:transform}
+#killer-perfume .nk-brand-group{display:flex;align-items:center;gap:40px;padding:27px 40px 27px 0;white-space:nowrap}
+#killer-perfume .nk-brand-group span{font-size:15px;letter-spacing:3px;color:#7f929a}
+#killer-perfume .nk-brand-group i{font-style:normal;font-size:11px;color:#5b6b71}
+#killer-perfume .nk-fragrance-card{padding:0;display:block;min-height:0}
+#killer-perfume .nk-fragrance-card::after{display:none}
+#killer-perfume .nk-fragrance-visual{position:relative;display:block;height:255px;background:radial-gradient(circle at 50% 55%,#2b3a3e 0%,#151d20 42%,#0d1214 72%)}
+#killer-perfume .nk-fragrance-visual::after{content:"";position:absolute;left:13%;right:13%;bottom:16px;height:18px;background:#0008;filter:blur(13px);border-radius:50%}
+#killer-perfume .nk-fragrance-visual img{position:relative;z-index:1;height:100%;width:100%;object-fit:contain;padding:10px}
+#killer-perfume .nk-fragrance-number{position:absolute;z-index:2;left:18px;top:17px}
+#killer-perfume .nk-fragrance-copy{display:block;padding:23px 24px 24px}
+#killer-perfume .nk-fragrance-card small{margin-top:0}
+#killer-perfume .nk-fragrance-card h4{min-height:50px}
+#killer-perfume .nk-show-more{display:flex;width:100%;align-items:center;justify-content:center;gap:12px;margin-top:12px;min-height:57px;border:1px solid #344044;border-radius:7px;background:#111719;color:#d9e1e2;font-size:13px}
+#killer-perfume .nk-show-more:hover{border-color:#71868d;background:#151e21}
+#killer-perfume .nk-show-more span{display:inline-flex;align-items:center;justify-content:center;min-width:25px;height:25px;padding-inline:6px;border:1px solid #53646a;border-radius:99px;color:var(--gold);font-size:9px}
+
+@media(max-width:700px){
+#killer-perfume .nk-brand-group{gap:24px;padding:20px 24px 20px 0}
+#killer-perfume .nk-brand-group span{font-size:10px;letter-spacing:1.6px}
+#killer-perfume .nk-brand-group i{font-size:8px}
+#killer-perfume .nk-brand-track{animation-duration:27s}
+#killer-perfume .nk-fragrance-card{display:grid;grid-template-columns:118px minmax(0,1fr);text-align:left}
+#killer-perfume .nk-fragrance-visual{height:100%;min-height:188px}
+#killer-perfume .nk-fragrance-visual img{padding:7px}
+#killer-perfume .nk-fragrance-number{left:11px;top:11px}
+#killer-perfume .nk-fragrance-copy{padding:18px 17px}
+#killer-perfume .nk-fragrance-card h4{font-size:17px;line-height:1.25;margin-right:0}
+#killer-perfume .nk-fragrance-card>p{margin-top:5px}
+#killer-perfume .nk-fragrance-more{margin-top:13px;padding-top:11px}
+#killer-perfume .nk-fragrance-details{font-size:11px}
+#killer-perfume .nk-show-more{min-height:53px;font-size:12px}
+#killer-perfume .nk-box-copy{order:1}
+#killer-perfume .nk-box-photo{order:2}
+}

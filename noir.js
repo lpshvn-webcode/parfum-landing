@@ -14,24 +14,24 @@
     {id:'pheramone',brand:'ЛИЧНЫЙ ВЫБОР',name:'Pheramone',full:'Pheramone',photo:'./assets/pheramone.webp',tone:'wine'}
   ];
   const fragrances=[
-    {name:'Amouage Guidance',group:'universal',sound:'Сладкое, кремовое, древесно-пряное',notes:'Груша, ладан, шафран, миндаль, османтус, ваниль, сандал, амбра'},
-    {name:'Miss Dior',group:'universal',sound:'Цветочное, сладкое, нежное',notes:'Роза, ваниль, бобы тонка, сандал, пачули'},
-    {name:'Carolina Herrera Good Girl Blush',group:'universal',sound:'Нежное, цветочное, пудрово-сладкое',notes:'Бергамот, горький миндаль, иланг-иланг, пион, ваниль, тонка'},
-    {name:'Kilian Good Girl Gone Bad',group:'universal',sound:'Яркое, цветочное, женственное',notes:'Апельсиновый цвет, роза, османтус, тубероза, жасмин, нарцисс'},
-    {name:'Lattafa Yara',group:'universal',sound:'Сладкое, кремовое, фруктово-ванильное',notes:'Мандарин, гелиотроп, орхидея, тропические фрукты, ваниль, мускус, сандал'},
-    {name:'Givenchy Ange ou Démon',group:'universal',sound:'Сладкое, цветочное, восточное',notes:'Шафран, тимьян, лилия, иланг-иланг, ваниль, тонка, палисандр, дубовый мох'},
-    {name:'Victoria’s Secret So Sexy',group:'universal',sound:'Сладкое, фруктово-цветочное, чувственное',notes:'Яблоко, клементины, орхидея, ваниль, мускус'},
-    {name:'Lanvin Modern Princess',group:'universal',sound:'Фруктовое, сладкое, цветочное',notes:'Красное яблоко, красная смородина, фрезия, жасмин, ванильная орхидея, белый мускус'},
-    {name:'Killer',group:'universal',sound:'Авторский аромат',notes:'Авторская композиция'},
-    {name:'Musk Kashmir',group:'universal',sound:'Мягкое, мускусное, пудровое, тёплое',notes:'Белый мускус, амбра, цветочные и древесные оттенки'},
-    {name:'Iceberg — Antonio Banderas Aqua Blue',group:'universal',sound:'Свежее, водянистое, лёгкое',notes:'Aqua Blue: акватическое, свежеводное направление'},
-    {name:'Creed Absolu Aventus',group:'men',sound:'Свежее, фруктово-пряное, древесное',notes:'Бергамот, грейпфрут, имбирь, ананас, кардамон, корица, ветивер, пачули, лабданум'},
-    {name:'Clive Christian Hedonistic',group:'men',sound:'Тёплое, древесно-табачное, глубокое',notes:'Мате, лабданум, табак'},
-    {name:'Dior Cologne',group:'men',sound:'Свежее, цитрусовое, чистое',notes:'Калабрийский бергамот, грейпфрут, цветочные и древесные оттенки'},
-    {name:'Феромон мужской',group:'men',sound:'Зависит от конкретной формулы',notes:'Состав зависит от формулы продукта'},
-    {name:'Louis Vuitton Imagination',group:'men',sound:'Свежее, цитрусовое, пряное',notes:'Амброксан, китайский чёрный чай, нероли, имбирь, корица, сицилийский кедрат'},
-    {name:'Louis Vuitton Symphony',group:'men',sound:'Яркое, цитрусовое, свежее',notes:'Грейпфрут, бергамот, апельсин, имбирь'},
-    {name:'Bvlgari Tygar',group:'men',sound:'Яркое, свежее, цитрусово-древесное',notes:'Грейпфрут и амбровый аккорд'}
+    {name:'Amouage Guidance',group:'universal',image:'amouage-guidance.png',sound:'Сладкое, кремовое, древесно-пряное',notes:'Груша, ладан, шафран, миндаль, османтус, ваниль, сандал, амбра'},
+    {name:'Miss Dior',group:'universal',image:'miss-dior.png',sound:'Цветочное, сладкое, нежное',notes:'Роза, ваниль, бобы тонка, сандал, пачули'},
+    {name:'Carolina Herrera Good Girl Blush',group:'universal',image:'good-girl-blush.png',sound:'Нежное, цветочное, пудрово-сладкое',notes:'Бергамот, горький миндаль, иланг-иланг, пион, ваниль, тонка'},
+    {name:'Kilian Good Girl Gone Bad',group:'universal',image:'good-girl-gone-bad.png',sound:'Яркое, цветочное, женственное',notes:'Апельсиновый цвет, роза, османтус, тубероза, жасмин, нарцисс'},
+    {name:'Lattafa Yara',group:'universal',image:'lattafa-yara.png',sound:'Сладкое, кремовое, фруктово-ванильное',notes:'Мандарин, гелиотроп, орхидея, тропические фрукты, ваниль, мускус, сандал'},
+    {name:'Givenchy Ange ou Démon',group:'universal',image:'ange-ou-demon.png',sound:'Сладкое, цветочное, восточное',notes:'Шафран, тимьян, лилия, иланг-иланг, ваниль, тонка, палисандр, дубовый мох'},
+    {name:'Victoria’s Secret So Sexy',group:'universal',image:'so-sexy.png',sound:'Сладкое, фруктово-цветочное, чувственное',notes:'Яблоко, клементины, орхидея, ваниль, мускус'},
+    {name:'Lanvin Modern Princess',group:'universal',image:'modern-princess.png',sound:'Фруктовое, сладкое, цветочное',notes:'Красное яблоко, красная смородина, фрезия, жасмин, ванильная орхидея, белый мускус'},
+    {name:'Killer',group:'universal',image:'killer.png',sound:'Авторский аромат',notes:'Авторская композиция'},
+    {name:'Musk Kashmir',group:'universal',image:'musk-kashmir.png',sound:'Мягкое, мускусное, пудровое, тёплое',notes:'Белый мускус, амбра, цветочные и древесные оттенки'},
+    {name:'Iceberg — Antonio Banderas Aqua Blue',group:'universal',image:'aqua-blue.png',sound:'Свежее, водянистое, лёгкое',notes:'Aqua Blue: акватическое, свежеводное направление'},
+    {name:'Creed Absolu Aventus',group:'men',image:'creed-absolu-aventus.png',sound:'Свежее, фруктово-пряное, древесное',notes:'Бергамот, грейпфрут, имбирь, ананас, кардамон, корица, ветивер, пачули, лабданум'},
+    {name:'Clive Christian Hedonistic',group:'men',image:'clive-hedonistic.png',sound:'Тёплое, древесно-табачное, глубокое',notes:'Мате, лабданум, табак'},
+    {name:'Dior Cologne',group:'men',image:'dior-cologne.png',sound:'Свежее, цитрусовое, чистое',notes:'Калабрийский бергамот, грейпфрут, цветочные и древесные оттенки'},
+    {name:'Феромон мужской',group:'men',image:'pheromone-men.png',sound:'Зависит от конкретной формулы',notes:'Состав зависит от формулы продукта'},
+    {name:'Louis Vuitton Imagination',group:'men',image:'lv-imagination.png',sound:'Свежее, цитрусовое, пряное',notes:'Амброксан, китайский чёрный чай, нероли, имбирь, корица, сицилийский кедрат'},
+    {name:'Louis Vuitton Symphony',group:'men',image:'lv-symphony.png',sound:'Яркое, цитрусовое, свежее',notes:'Грейпфрут, бергамот, апельсин, имбирь'},
+    {name:'Bvlgari Tygar',group:'men',image:'bvlgari-tygar.png',sound:'Яркое, свежее, цитрусово-древесное',notes:'Грейпфрут и амбровый аккорд'}
   ];
   const mixes={
     day:{eyebrow:'01 / НА КАЖДЫЙ ДЕНЬ',title:'ЛЁГКО. ЧИСТО. СОБРАННО.',text:'Свежие и цитрусовые направления для города, работы и планов без расписания.',vials:['Свежесть','Цитрус','Чистота','Дерево','Фаворит']},
@@ -41,7 +41,7 @@
   const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const params=new URLSearchParams(location.search);
   let offer=['5','10'].includes(params.get('offer'))?params.get('offer'):(root.dataset.offer==='5'?'5':'10');
-  let heroIndex=0,heroTimer=null,heroSwapTimer=null,heroVisible=true;
+  let heroIndex=0,heroTimer=null,heroSwapTimer=null,heroVisible=true,catalogFilter='all',catalogExpanded=false;
   function commitHero(id){
     const item=heroCatalog.find(entry=>entry.id===id);if(!item)return;
     heroIndex=heroCatalog.indexOf(item);root.dataset.tone=item.tone;
@@ -68,11 +68,20 @@
     $('#nk-mix-output').innerHTML=`<span>${escape(mix.eyebrow)}</span><h4>${escape(mix.title)}</h4><p>${escape(mix.text)}</p><div>${mix.vials.map((vial,index)=>`<i><b>0${index+1}</b>${escape(vial)}</i>`).join('')}</div>`;
   }
   function renderCatalog(){
-    $('#nk-fragrance-grid').innerHTML=fragrances.map((item,index)=>`<button type="button" class="nk-fragrance-card" data-group="${item.group}" aria-expanded="false"><span class="nk-fragrance-number">${String(index+1).padStart(2,'0')}</span><small>${item.group==='men'?'МУЖСКОЙ':'ЖЕНСКИЙ / УНИСЕКС'}</small><h4>${escape(item.name)}</h4><p>${escape(item.sound)}</p><span class="nk-fragrance-more">Звучание и ноты <b>+</b></span><span class="nk-fragrance-details"><strong>Основные ноты</strong>${escape(item.notes)}</span></button>`).join('');
+    $('#nk-fragrance-grid').innerHTML=fragrances.map((item,index)=>{const photo=item.image.startsWith('data:')?item.image:`./assets/catalog/${item.image}`;return `<button type="button" class="nk-fragrance-card" data-group="${item.group}" aria-expanded="false"><span class="nk-fragrance-visual"><img src="${photo}" width="720" height="720" loading="${index<3?'eager':'lazy'}" alt="Флакон ${escape(item.name)}"><span class="nk-fragrance-number">${String(index+1).padStart(2,'0')}</span></span><span class="nk-fragrance-copy"><small>${item.group==='men'?'МУЖСКОЙ':'ЖЕНСКИЙ / УНИСЕКС'}</small><h4>${escape(item.name)}</h4><p>${escape(item.sound)}</p><span class="nk-fragrance-more">Звучание и ноты <b>+</b></span><span class="nk-fragrance-details"><strong>Основные ноты</strong>${escape(item.notes)}</span></span></button>`;}).join('');
   }
   function filterCatalog(group){
+    catalogFilter=group;catalogExpanded=false;
     $$('[data-filter]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.filter===group)));
-    $$('.nk-fragrance-card').forEach(card=>card.hidden=group!=='all'&&card.dataset.group!==group);
+    updateCatalogVisibility();
+  }
+  function updateCatalogVisibility(){
+    const matches=$$('.nk-fragrance-card').filter(card=>catalogFilter==='all'||card.dataset.group===catalogFilter);
+    $$('.nk-fragrance-card').forEach(card=>card.hidden=true);
+    matches.forEach((card,index)=>card.hidden=!catalogExpanded&&index>=3);
+    const more=$('#nk-show-more'),remaining=Math.max(0,matches.length-3);
+    more.hidden=!remaining;more.setAttribute('aria-expanded',String(catalogExpanded));
+    more.innerHTML=catalogExpanded?'Скрыть каталог <span>↑</span>':`Показать ещё <span>${remaining}</span>`;
   }
   function setOffer(value,updateUrl=true){
     offer=value;root.dataset.offer=value;
@@ -88,6 +97,7 @@
     if(button?.dataset.offerChoice){setOffer(button.dataset.offerChoice);return;}
     if(button?.dataset.mix){renderMix(button.dataset.mix);return;}
     if(button?.dataset.filter){filterCatalog(button.dataset.filter);return;}
+    if(button?.id==='nk-show-more'){catalogExpanded=!catalogExpanded;updateCatalogVisibility();return;}
     const card=event.target.closest('.nk-fragrance-card');
     if(card){const open=card.getAttribute('aria-expanded')==='true';card.setAttribute('aria-expanded',String(!open));return;}
     const anchor=event.target.closest('a[href^="#kp-"]');

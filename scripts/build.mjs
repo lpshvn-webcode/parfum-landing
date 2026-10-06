@@ -2,16 +2,19 @@ import { readFile, mkdir, writeFile, copyFile } from 'node:fs/promises';
 const root=new URL('../',import.meta.url);
 const [html,css,js]=await Promise.all(['noir.html','noir.css','noir.js'].map(file=>readFile(new URL(file,root),'utf8')));
 const fragment=html.split('<!-- KP:START -->')[1].split('<!-- KP:END -->')[0].trim();
-const assets=['campaign.webp','imagination.webp','tygar.webp','hedonistic.webp','absolu.webp','pheramone.webp','manrope-400.ttf','manrope-600.ttf'];
+const catalogAssets=['amouage-guidance.png','miss-dior.png','good-girl-blush.png','good-girl-gone-bad.png','lattafa-yara.png','ange-ou-demon.png','so-sexy.png','modern-princess.png','killer.png','musk-kashmir.png','aqua-blue.png','creed-absolu-aventus.png','clive-hedonistic.png','dior-cologne.png','pheromone-men.png','lv-imagination.png','lv-symphony.png','bvlgari-tygar.png'].map(file=>`catalog/${file}`);
+const assets=['campaign.webp','imagination.webp','tygar.webp','hedonistic.webp','absolu.webp','pheramone.webp','manrope-400.ttf','manrope-600.ttf',...catalogAssets];
 await mkdir(new URL('dist/assets/',root),{recursive:true});
+await mkdir(new URL('dist/assets/catalog/',root),{recursive:true});
 const inlineAssets=new Map();
 for(const file of assets){
   const data=await readFile(new URL(`assets/${file}`,root));
-  inlineAssets.set(`./assets/${file}`,`data:${file.endsWith('.webp')?'image/webp':'font/ttf'};base64,${data.toString('base64')}`);
+  const mime=file.endsWith('.webp')?'image/webp':file.endsWith('.png')?'image/png':'font/ttf';
+  inlineAssets.set(`./assets/${file}`,`data:${mime};base64,${data.toString('base64')}`);
   await copyFile(new URL(`assets/${file}`,root),new URL(`dist/assets/${file}`,root));
 }
 await copyFile(new URL('assets/manrope-OFL.txt',root),new URL('dist/assets/manrope-OFL.txt',root));
-const inline=(text)=>{for(const [from,to]of inlineAssets)text=text.replaceAll(from,to);return text;};
+const inline=(text)=>{for(const [from,to]of inlineAssets){text=text.replaceAll(from,to);if(from.startsWith('./assets/catalog/'))text=text.replaceAll(`image:'${from.split('/').at(-1)}'`,`image:'${to}'`);}return text;};
 const assetBase=process.env.ASSET_BASE;
 if(assetBase && !/^https:\/\/[a-zA-Z0-9.-]+(?:\/[a-zA-Z0-9_./-]*)?$/.test(assetBase))throw new Error('ASSET_BASE must be a plain HTTPS asset directory URL');
 const external=(text)=>assetBase?text.replaceAll('./assets/',assetBase.replace(/\/$/,'')+'/'):text;

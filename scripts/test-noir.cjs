@@ -16,6 +16,9 @@ const path=require('node:path');
   assert.equal(await page.locator('.nk-hero-switch').evaluate(element=>getComputedStyle(element).display),'none');
   assert.equal(await page.locator('.nk-stage-progress i').count(),5);
   assert.equal(await page.locator('.nk-fragrance-card').count(),18);
+  assert.equal(await page.locator('.nk-fragrance-card:visible').count(),3);
+  assert.equal(await page.locator('.nk-brand-group').count(),2);
+  assert(await page.locator('.nk-fragrance-card:visible img').first().evaluate(image=>image.complete&&image.naturalWidth>0));
   assert.equal(await page.locator('.nk-mode-switch').count(),0);
   assert.equal(await page.locator('dialog, #nk-form').count(),0);
   const ctas=page.locator('a.nk-button, .nk-header-cta, .nk-text-link, .nk-dock a');
@@ -31,9 +34,12 @@ const path=require('node:path');
   await page.locator('.nk-fragrance-card').first().click();
   assert.equal(await page.locator('.nk-fragrance-card').first().getAttribute('aria-expanded'),'true');
   await page.locator('[data-filter="universal"]').click();
-  assert.equal(await page.locator('.nk-fragrance-card:visible').count(),11);
+  assert.equal(await page.locator('.nk-fragrance-card:visible').count(),3);
+  assert((await page.locator('#nk-show-more').textContent()).includes('8'));
+  await page.locator('#nk-show-more').click();assert.equal(await page.locator('.nk-fragrance-card:visible').count(),11);
   await page.locator('[data-filter="men"]').click();
-  assert.equal(await page.locator('.nk-fragrance-card:visible').count(),7);
+  assert.equal(await page.locator('.nk-fragrance-card:visible').count(),3);
+  await page.locator('#nk-show-more').click();assert.equal(await page.locator('.nk-fragrance-card:visible').count(),7);
   console.log('PASS mood examples, 18-item catalogue, details and filters');
 
   await page.locator('[data-offer-choice="5"]').click();
@@ -41,6 +47,8 @@ const path=require('node:path');
   assert(new URL(page.url()).searchParams.get('offer')==='5');
   const stacked=await page.evaluate(()=>{const photo=document.querySelector('.nk-statement-photo').getBoundingClientRect();const copy=document.querySelector('.nk-statement-content').getBoundingClientRect();return copy.top>=photo.bottom-30;});
   assert(stacked);await noOverflow();
+  const boxOrder=await page.evaluate(()=>{const photo=document.querySelector('.nk-box-photo').getBoundingClientRect();const copy=document.querySelector('.nk-box-copy').getBoundingClientRect();return copy.top<photo.top;});
+  assert(boxOrder);
   await page.locator('.nk-statement').screenshot({path:path.join(artifacts,'noir-statement-mobile.png')});
   console.log('PASS mobile statement composition and offer variants');
 
@@ -55,7 +63,8 @@ const path=require('node:path');
     await page.goto(base+`/dist/preview-${offer}.html`);await page.evaluate(()=>document.fonts.ready);
     assert.equal(await page.locator('#killer-perfume').getAttribute('data-offer'),offer);
     assert((await page.locator('#nk-hero-image').getAttribute('src')).startsWith('data:image/webp'));
-    assert.equal(await page.locator('.nk-fragrance-card').count(),18);await noOverflow();
+    assert.equal(await page.locator('.nk-fragrance-card').count(),18);
+    assert((await page.locator('.nk-fragrance-card img').first().getAttribute('src')).startsWith('data:image/png'));await noOverflow();
   }
   console.log('PASS standalone Tilda previews');
 
