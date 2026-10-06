@@ -18,7 +18,7 @@ const leftovers=(body+script+styles).match(/\.\/assets\/[^'")\s]*/g);
 if(leftovers)throw new Error(`Unresolved local assets: ${[...new Set(leftovers)].join(', ')}`);
 const unused=Object.keys(urls).filter(file=>!used.has(file));
 if(unused.length)throw new Error(`Unused Tilda URLs: ${unused.join(', ')}`);
-const fonts='<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">';
+const fonts='<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet">';
 const output=`<!-- KILLER PERFUME / Tilda T123. Insert the whole file into one HTML block (T123), full width, no padding. -->\n${fonts}\n<style>\n${styles}\n</style>\n${body}\n<script>\n${script}\n</script>\n`;
 await mkdir(new URL('tilda/',root),{recursive:true});
 await writeFile(new URL('tilda/killer-perfume-t123.html',root),output);
