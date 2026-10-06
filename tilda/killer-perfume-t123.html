@@ -28,9 +28,7 @@
 #killer-perfume .nk-header nav{display:flex;gap:40px;font-size:13px;color:#b5bfc2}
 #killer-perfume .nk-header nav a:hover{color:white}
 #killer-perfume .nk-header-cta{display:flex;align-items:center;gap:22px;font-size:13px}
-#killer-perfume .nk-arrow{position:relative;display:inline-block;width:18px;height:18px;flex-shrink:0}
-#killer-perfume .nk-arrow::before{content:"";position:absolute;right:2px;top:2px;width:11px;height:11px;border-top:1.5px solid currentColor;border-right:1.5px solid currentColor}
-#killer-perfume .nk-arrow::after{content:"";position:absolute;top:9px;left:0;width:19px;height:1.5px;background:currentColor;transform:rotate(-45deg)}
+#killer-perfume .nk-arrow{display:inline-block;width:18px;height:18px;flex-shrink:0;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M3.6 14.4L14 4M5.4 4H14V12.6'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpath d='M3.6 14.4L14 4M5.4 4H14V12.6'/%3E%3C/svg%3E") center/contain no-repeat}
 #killer-perfume .nk-button{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:56px;border:1px solid transparent;border-radius:5px;padding:16px 23px;font-size:15px;font-weight:600;line-height:1.4;transition:background .2s,border-color .2s,transform .2s}
 #killer-perfume .nk-button-light{background:var(--ink);color:#111619}
 #killer-perfume .nk-button-light:hover:not(:disabled){background:#d8e3e5;transform:translateY(-1px)}
@@ -520,9 +518,9 @@
 #killer-perfume .nk-dock .nk-button{animation:nkRing 3.4s ease-out 2.6s infinite}
 #killer-perfume :is(.nk-button,.nk-header-cta,.nk-text-link,.nk-footer-cta){position:relative;overflow:hidden;isolation:isolate}
 #killer-perfume :is(.nk-button,.nk-header-cta,.nk-text-link,.nk-footer-cta)::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(105deg,transparent 35%,#0000001f 50%,transparent 65%);transform:translateX(-120%);transition:transform .75s cubic-bezier(.2,.7,.2,1);pointer-events:none}
-#killer-perfume :is(.nk-button,.nk-header-cta,.nk-text-link,.nk-footer-cta):hover::before{transform:translateX(120%)}
+@media(hover:hover){#killer-perfume :is(.nk-button,.nk-header-cta,.nk-text-link,.nk-footer-cta):hover::before{transform:translateX(120%)}}
 #killer-perfume :is(.nk-button,.nk-header-cta,.nk-text-link,.nk-footer-cta) .nk-arrow{transition:transform .35s cubic-bezier(.2,.7,.2,1)}
-#killer-perfume :is(.nk-button,.nk-header-cta,.nk-text-link,.nk-footer-cta):hover .nk-arrow{transform:translate(4px,-4px)}
+@media(hover:hover){#killer-perfume :is(.nk-button,.nk-header-cta,.nk-text-link,.nk-footer-cta):hover .nk-arrow{transform:translate(4px,-4px)}}
 #killer-perfume :is(.nk-button,.nk-header-cta,.nk-text-link,.nk-footer-cta):active{transform:scale(.97)}
 #killer-perfume .nk-scrollbar{position:fixed;z-index:25;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),#f1f0eb);transform:scaleX(var(--sp,0));transform-origin:0 50%;pointer-events:none}
 #killer-perfume.nk-motion .nk-rv{opacity:0}
@@ -544,6 +542,10 @@
 #killer-perfume .nk-social a:hover svg{transform:rotate(-10deg) scale(1.12)}
 @media(max-width:700px){#killer-perfume.nk-motion .nk-process article::before{display:none}}
 @media(prefers-reduced-motion:reduce){#killer-perfume .nk-rv,#killer-perfume .nk-split .nk-w{opacity:1!important}#killer-perfume .nk-hero-stage{transform:none!important}}
+@keyframes nkOut{to{opacity:0;transform:translate3d(0,18px,0) scale(.97)}}
+#killer-perfume .nk-fragrance-card.is-leaving{animation:nkOut .42s cubic-bezier(.4,0,.2,1) var(--ld,0ms) forwards;pointer-events:none}
+#killer-perfume.nk-motion .nk-fragrance-card.is-leaving{animation:nkOut .42s cubic-bezier(.4,0,.2,1) var(--ld,0ms) forwards}
+#killer-perfume #nk-show-more,#killer-perfume .nk-catalog-filters{scroll-margin-top:12px}
 
 </style>
 <div id="killer-perfume" data-offer="10" data-tone="ice">
@@ -715,6 +717,14 @@
   function closeCert(){$('#nk-lightbox').hidden=true;document.documentElement.style.overflow='';}
   document.addEventListener('keydown',event=>{if($('#nk-lightbox').hidden)return;if(event.key==='Escape')closeCert();if(event.key==='ArrowRight')stepCert(1);if(event.key==='ArrowLeft')stepCert(-1);});
   $('#nk-proof-track').addEventListener('scroll',()=>requestAnimationFrame(updateProofCount),{passive:true});
+  function collapseCatalog(){
+    const extra=$$('.nk-fragrance-card').filter(card=>!card.hidden).slice(3);
+    const finish=()=>{catalogExpanded=false;updateCatalogVisibility();extra.forEach(card=>card.classList.remove('is-leaving'));};
+    $('#kp-builder').scrollIntoView({behavior:reduced()?'auto':'smooth',block:'start'});
+    if(reduced()||!extra.length){finish();return;}
+    extra.forEach((card,index)=>{card.style.setProperty('--ld',Math.min(index,6)*25+'ms');card.classList.add('is-leaving');});
+    setTimeout(finish,620);
+  }
   function setOffer(value){
     offer=value;root.dataset.offer=value;
     $$('[data-offer-choice]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.offerChoice===offer)));
@@ -732,7 +742,7 @@
     if(button?.dataset.hero){setHero(button.dataset.hero);startHeroShow();return;}
     if(button?.dataset.offerChoice){setOffer(button.dataset.offerChoice);return;}
     if(button?.dataset.filter){filterCatalog(button.dataset.filter);return;}
-    if(button?.id==='nk-show-more'){catalogExpanded=!catalogExpanded;updateCatalogVisibility();return;}
+    if(button?.id==='nk-show-more'){if(catalogExpanded)collapseCatalog();else{catalogExpanded=true;updateCatalogVisibility();}return;}
     const card=event.target.closest('.nk-fragrance-card');
     if(card){const open=card.getAttribute('aria-expanded')==='true';card.setAttribute('aria-expanded',String(!open));return;}
     const anchor=event.target.closest('a[href^="#kp-"]');
@@ -741,6 +751,7 @@
   const stackCards=$$('.nk-stack-card');
   if(stackCards.length){
     root.classList.add('nk-js');
+    if(CSS.supports('overflow','clip')){for(let node=root.parentElement;node&&node!==document.documentElement;node=node.parentElement){const style=getComputedStyle(node);if(/hidden|auto|scroll/.test(style.overflowX+' '+style.overflowY))node.style.setProperty('overflow','clip','important');}}
     const stackList=$('.nk-stack-list');
     stackCards.forEach((card,index)=>{
       card.style.setProperty('--i',index);
