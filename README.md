@@ -15,6 +15,8 @@
 
 ## Tilda T123
 
+Готовый файл для вставки: `tilda/killer-perfume-t123.html`. Его собирает `npm run build:tilda` из `noir.*` и ссылок на картинки в `scripts/tilda-urls.json` (имя файла → ссылка Tilda); шрифт Manrope подключается с Google Fonts. Оригиналы лёгких картинок для загрузки в Tilda лежат в `tilda-upload/`. Ниже описан прежний общий экспорт `npm run build`.
+
 `npm run build` создаёт:
 
 - `dist/tilda-10.html` и `dist/tilda-5.html` — содержимое для T123 (без html/head/body).

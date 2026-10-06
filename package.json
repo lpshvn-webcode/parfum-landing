@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "node scripts/serve.mjs",
     "build": "node scripts/build.mjs",
-    "test": "node scripts/test-noir.cjs"
+    "test": "node scripts/test-noir.cjs",
+    "build:tilda": "node scripts/build-tilda.mjs"
   }
 }
