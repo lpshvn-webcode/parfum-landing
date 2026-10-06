@@ -370,7 +370,7 @@
 #killer-perfume .nk-stack-card:last-child{margin-bottom:0}
 #killer-perfume .nk-stack-card[data-tone=gold]{--tint:#d5b98b;--glow:#80521d3a}
 #killer-perfume .nk-stack-card[data-tone=wine]{--tint:#c3958f;--glow:#6d0f2440}
-#killer-perfume .nk-stack-card::before{content:"";position:absolute;inset:0;background:#090c0e66;-webkit-backdrop-filter:blur(14px) saturate(120%);backdrop-filter:blur(14px) saturate(120%);opacity:min(1,calc(var(--d)*1.15));pointer-events:none;z-index:2}
+#killer-perfume .nk-stack-card::before{content:"";position:absolute;inset:0;background:#090c0e80;-webkit-backdrop-filter:blur(24px) saturate(130%);backdrop-filter:blur(24px) saturate(130%);opacity:min(1,calc(var(--d)*1.7));pointer-events:none;z-index:2}
 #killer-perfume .nk-stack-card::after{content:"";position:absolute;width:360px;height:360px;border-radius:50%;right:-110px;top:-130px;border:1px solid #9ab2b71f;background:radial-gradient(circle,var(--glow),transparent 68%);pointer-events:none;transform:translate3d(calc(var(--s)*-90px),calc(var(--s)*70px),0) scale(calc(.8 + var(--s)*.5))}
 #killer-perfume .nk-stack-card.is-active{border-color:color-mix(in srgb,var(--tint) 55%,#293438);box-shadow:0 18px 60px #0007,0 0 0 1px color-mix(in srgb,var(--tint) 18%,transparent)}
 #killer-perfume .nk-stack-meta{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:11px;letter-spacing:2px;color:#7f9199;position:relative;z-index:1}
@@ -546,7 +546,6 @@
 #killer-perfume .nk-fragrance-card.is-leaving{animation:nkOut .42s cubic-bezier(.4,0,.2,1) var(--ld,0ms) forwards;pointer-events:none}
 #killer-perfume.nk-motion .nk-fragrance-card.is-leaving{animation:nkOut .42s cubic-bezier(.4,0,.2,1) var(--ld,0ms) forwards}
 #killer-perfume #nk-show-more,#killer-perfume .nk-catalog-filters{scroll-margin-top:12px}
-#killer-perfume #nk-diag{position:fixed;z-index:99;left:8px;right:8px;top:8px;max-height:70vh;overflow:auto;margin:0;padding:12px;background:#000e;color:#7CFC9A;font:10px/1.45 ui-monospace,Menlo,monospace;white-space:pre-wrap;border:1px solid #7CFC9A;border-radius:8px}
 
 </style>
 <div id="killer-perfume" data-offer="10" data-tone="ice">
@@ -791,17 +790,6 @@
       stackCards.forEach((card,index)=>card.classList.toggle('is-active',inView&&index===active));
       if(inView&&active!==activeStack){activeStack=active;$$('.nk-stack-nav button').forEach(button=>button.setAttribute('aria-current',String(Number(button.dataset.stack)===active)));}
     };
-    const stackLabel=$('.nk-stack>.nk-eyebrow');let taps=[];
-    stackLabel?.addEventListener('click',()=>{
-      const now=Date.now();taps=taps.filter(time=>now-time<3000);taps.push(now);if(taps.length<5)return;taps=[];
-      let panel=$('#nk-diag');if(panel){panel.remove();return;}
-      panel=document.createElement('pre');panel.id='nk-diag';root.append(panel);
-      const scrollers=new Set();document.addEventListener('scroll',event=>scrollers.add(event.target===document?'document':(event.target.tagName+'#'+event.target.id+'.'+String(event.target.className).split(' ')[0])),true);
-      const describe=node=>{const style=getComputedStyle(node);const flags=[style.position,'ovf:'+style.overflowX+'/'+style.overflowY,'disp:'+style.display];if(style.transform!=='none')flags.push('transform');if(style.contain&&style.contain!=='none')flags.push('contain:'+style.contain);if(style.willChange&&style.willChange!=='auto')flags.push('will:'+style.willChange);if(style.filter!=='none')flags.push('filter');if(node.scrollHeight>node.clientHeight+1&&!/visible|clip/.test(style.overflowY))flags.push('SCROLLER');return (node.tagName.toLowerCase()+(node.id?'#'+node.id:'')+(node.className&&typeof node.className==='string'?'.'+node.className.trim().split(/\s+/).slice(0,2).join('.'):''))+'  '+flags.join(' ');};
-      const render=()=>{if(!panel.isConnected)return;const card=stackCards[0],style=getComputedStyle(card),list=stackList.getBoundingClientRect();const chain=[];for(let node=card;node;node=node.parentElement)chain.push(describe(node));
-        panel.textContent=['KP DIAG (5 taps to close)',navigator.userAgent.slice(0,120),'sticky:'+CSS.supports('position','sticky')+' clip:'+CSS.supports('overflow','clip'),'scrollY:'+Math.round(scrollY)+' scrollers:'+[...scrollers].join(','),'card0 pos:'+style.position+' top:'+style.top+' rect.top:'+Math.round(card.getBoundingClientRect().top)+' | card1 rect.top:'+Math.round(stackCards[1].getBoundingClientRect().top),'list top/bottom:'+Math.round(list.top)+'/'+Math.round(list.bottom),'--- ancestors ---',...chain].join('\n');requestAnimationFrame(render);};
-      render();
-    });
     const requestStack=()=>{if(!stackTick){stackTick=true;requestAnimationFrame(updateStack);}};
     addEventListener('scroll',requestStack,{passive:true});addEventListener('resize',requestStack);updateStack();
     root.addEventListener('click',event=>{

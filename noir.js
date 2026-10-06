@@ -183,17 +183,6 @@
       stackCards.forEach((card,index)=>card.classList.toggle('is-active',inView&&index===active));
       if(inView&&active!==activeStack){activeStack=active;$$('.nk-stack-nav button').forEach(button=>button.setAttribute('aria-current',String(Number(button.dataset.stack)===active)));}
     };
-    const stackLabel=$('.nk-stack>.nk-eyebrow');let taps=[];
-    stackLabel?.addEventListener('click',()=>{
-      const now=Date.now();taps=taps.filter(time=>now-time<3000);taps.push(now);if(taps.length<5)return;taps=[];
-      let panel=$('#nk-diag');if(panel){panel.remove();return;}
-      panel=document.createElement('pre');panel.id='nk-diag';root.append(panel);
-      const scrollers=new Set();document.addEventListener('scroll',event=>scrollers.add(event.target===document?'document':(event.target.tagName+'#'+event.target.id+'.'+String(event.target.className).split(' ')[0])),true);
-      const describe=node=>{const style=getComputedStyle(node);const flags=[style.position,'ovf:'+style.overflowX+'/'+style.overflowY,'disp:'+style.display];if(style.transform!=='none')flags.push('transform');if(style.contain&&style.contain!=='none')flags.push('contain:'+style.contain);if(style.willChange&&style.willChange!=='auto')flags.push('will:'+style.willChange);if(style.filter!=='none')flags.push('filter');if(node.scrollHeight>node.clientHeight+1&&!/visible|clip/.test(style.overflowY))flags.push('SCROLLER');return (node.tagName.toLowerCase()+(node.id?'#'+node.id:'')+(node.className&&typeof node.className==='string'?'.'+node.className.trim().split(/\s+/).slice(0,2).join('.'):''))+'  '+flags.join(' ');};
-      const render=()=>{if(!panel.isConnected)return;const card=stackCards[0],style=getComputedStyle(card),list=stackList.getBoundingClientRect();const chain=[];for(let node=card;node;node=node.parentElement)chain.push(describe(node));
-        panel.textContent=['KP DIAG (5 taps to close)',navigator.userAgent.slice(0,120),'sticky:'+CSS.supports('position','sticky')+' clip:'+CSS.supports('overflow','clip'),'scrollY:'+Math.round(scrollY)+' scrollers:'+[...scrollers].join(','),'card0 pos:'+style.position+' top:'+style.top+' rect.top:'+Math.round(card.getBoundingClientRect().top)+' | card1 rect.top:'+Math.round(stackCards[1].getBoundingClientRect().top),'list top/bottom:'+Math.round(list.top)+'/'+Math.round(list.bottom),'--- ancestors ---',...chain].join('\n');requestAnimationFrame(render);};
-      render();
-    });
     const requestStack=()=>{if(!stackTick){stackTick=true;requestAnimationFrame(updateStack);}};
     addEventListener('scroll',requestStack,{passive:true});addEventListener('resize',requestStack);updateStack();
     root.addEventListener('click',event=>{

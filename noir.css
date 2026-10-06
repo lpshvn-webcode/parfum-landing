@@ -367,7 +367,7 @@
 #killer-perfume .nk-stack-card:last-child{margin-bottom:0}
 #killer-perfume .nk-stack-card[data-tone=gold]{--tint:#d5b98b;--glow:#80521d3a}
 #killer-perfume .nk-stack-card[data-tone=wine]{--tint:#c3958f;--glow:#6d0f2440}
-#killer-perfume .nk-stack-card::before{content:"";position:absolute;inset:0;background:#090c0e66;-webkit-backdrop-filter:blur(14px) saturate(120%);backdrop-filter:blur(14px) saturate(120%);opacity:min(1,calc(var(--d)*1.15));pointer-events:none;z-index:2}
+#killer-perfume .nk-stack-card::before{content:"";position:absolute;inset:0;background:#090c0e80;-webkit-backdrop-filter:blur(24px) saturate(130%);backdrop-filter:blur(24px) saturate(130%);opacity:min(1,calc(var(--d)*1.7));pointer-events:none;z-index:2}
 #killer-perfume .nk-stack-card::after{content:"";position:absolute;width:360px;height:360px;border-radius:50%;right:-110px;top:-130px;border:1px solid #9ab2b71f;background:radial-gradient(circle,var(--glow),transparent 68%);pointer-events:none;transform:translate3d(calc(var(--s)*-90px),calc(var(--s)*70px),0) scale(calc(.8 + var(--s)*.5))}
 #killer-perfume .nk-stack-card.is-active{border-color:color-mix(in srgb,var(--tint) 55%,#293438);box-shadow:0 18px 60px #0007,0 0 0 1px color-mix(in srgb,var(--tint) 18%,transparent)}
 #killer-perfume .nk-stack-meta{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:11px;letter-spacing:2px;color:#7f9199;position:relative;z-index:1}
@@ -543,4 +543,3 @@
 #killer-perfume .nk-fragrance-card.is-leaving{animation:nkOut .42s cubic-bezier(.4,0,.2,1) var(--ld,0ms) forwards;pointer-events:none}
 #killer-perfume.nk-motion .nk-fragrance-card.is-leaving{animation:nkOut .42s cubic-bezier(.4,0,.2,1) var(--ld,0ms) forwards}
 #killer-perfume #nk-show-more,#killer-perfume .nk-catalog-filters{scroll-margin-top:12px}
-#killer-perfume #nk-diag{position:fixed;z-index:99;left:8px;right:8px;top:8px;max-height:70vh;overflow:auto;margin:0;padding:12px;background:#000e;color:#7CFC9A;font:10px/1.45 ui-monospace,Menlo,monospace;white-space:pre-wrap;border:1px solid #7CFC9A;border-radius:8px}
