@@ -366,14 +366,14 @@
 
 #killer-perfume .nk-stack{padding-block:96px 40px}
 #killer-perfume .nk-stack-list{display:block;padding-bottom:12px}
-#killer-perfume .nk-stack-card{--tint:#8faeb6;--glow:#5e87901f;--d:0;--s:.5;position:sticky;top:calc(24px + var(--i,0)*20px);margin-bottom:24px;min-height:340px;padding:30px 36px 36px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(145deg,#151d20,#0e1315);border:1px solid #293438;border-radius:12px;overflow:hidden;transform-origin:50% 0;transform:translate3d(0,var(--ty,0px),0) scale(calc(1 - var(--d)*.05));transition:border-color .5s,box-shadow .5s;will-change:transform}
+#killer-perfume .nk-stack-card{--tint:#8faeb6;--glow:#5e87901f;--d:0;--s:.5;position:sticky;top:calc(24px + var(--i,0)*20px);margin-bottom:24px;min-height:340px;padding:30px 36px 36px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(145deg,#151d20,#0e1315);border:1px solid #293438;border-radius:12px;overflow:hidden;transform-origin:50% 0;transform:scale(calc(1 - var(--d)*.05));transition:border-color .5s,box-shadow .5s;will-change:transform}
 #killer-perfume .nk-stack-card:last-child{margin-bottom:0}
 #killer-perfume .nk-stack-card[data-tone=gold]{--tint:#d5b98b;--glow:#80521d3a}
 #killer-perfume .nk-stack-card[data-tone=wine]{--tint:#c3958f;--glow:#6d0f2440}
-#killer-perfume .nk-stack-card::before{content:"";position:absolute;inset:0;background:#090c0e;opacity:calc(var(--d)*.4);pointer-events:none;z-index:2}
+#killer-perfume .nk-stack-card::before{content:"";position:absolute;inset:0;background:#090c0e66;-webkit-backdrop-filter:blur(14px) saturate(120%);backdrop-filter:blur(14px) saturate(120%);opacity:min(1,calc(var(--d)*1.15));pointer-events:none;z-index:2}
 #killer-perfume .nk-stack-card::after{content:"";position:absolute;width:360px;height:360px;border-radius:50%;right:-110px;top:-130px;border:1px solid #9ab2b71f;background:radial-gradient(circle,var(--glow),transparent 68%);pointer-events:none;transform:translate3d(calc(var(--s)*-90px),calc(var(--s)*70px),0) scale(calc(.8 + var(--s)*.5))}
 #killer-perfume .nk-stack-card.is-active{border-color:color-mix(in srgb,var(--tint) 55%,#293438);box-shadow:0 18px 60px #0007,0 0 0 1px color-mix(in srgb,var(--tint) 18%,transparent)}
-#killer-perfume .nk-stack-meta{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:11px;letter-spacing:2px;color:#7f9199;position:relative;z-index:3}
+#killer-perfume .nk-stack-meta{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:11px;letter-spacing:2px;color:#7f9199;position:relative;z-index:1}
 #killer-perfume .nk-stack-meta span:last-child{color:var(--tint)}
 #killer-perfume .nk-stack-meta::after{content:"";position:absolute;left:0;right:0;top:-30px;height:2px;background:var(--tint);transform:scaleX(0);transform-origin:0 50%;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
 #killer-perfume .nk-stack-card.is-active .nk-stack-meta::after{transform:scaleX(1)}
@@ -546,6 +546,7 @@
 #killer-perfume .nk-fragrance-card.is-leaving{animation:nkOut .42s cubic-bezier(.4,0,.2,1) var(--ld,0ms) forwards;pointer-events:none}
 #killer-perfume.nk-motion .nk-fragrance-card.is-leaving{animation:nkOut .42s cubic-bezier(.4,0,.2,1) var(--ld,0ms) forwards}
 #killer-perfume #nk-show-more,#killer-perfume .nk-catalog-filters{scroll-margin-top:12px}
+#killer-perfume #nk-diag{position:fixed;z-index:99;left:8px;right:8px;top:8px;max-height:70vh;overflow:auto;margin:0;padding:12px;background:#000e;color:#7CFC9A;font:10px/1.45 ui-monospace,Menlo,monospace;white-space:pre-wrap;border:1px solid #7CFC9A;border-radius:8px}
 
 </style>
 <div id="killer-perfume" data-offer="10" data-tone="ice">
@@ -773,40 +774,34 @@
       const seen=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting&&!entry.target.classList.contains('is-seen')){entry.target.classList.add('is-seen');countUp(entry.target);seen.unobserve(entry.target);}}),{threshold:.35});
       stackCards.forEach(card=>seen.observe(card));
     }else stackCards.forEach(card=>card.classList.add('is-seen'));
-    let stackTick=false,activeStack=-1,jsSticky=false,brokenFrames=0;
+    let stackTick=false,activeStack=-1;
     const stackTops=()=>stackCards.map(card=>parseFloat(getComputedStyle(card).top)||0);
     const updateStack=()=>{
       stackTick=false;
-      const tops=stackTops(),listRect=stackList.getBoundingClientRect(),heights=stackCards.map(card=>card.offsetHeight),gap=parseFloat(getComputedStyle(stackCards[0]).marginBottom)||0;
-      const rects=stackCards.map(card=>card.getBoundingClientRect());
-      if(!jsSticky&&!reduced()){
-        const broken=rects.some((rect,index)=>rect.top<tops[index]-4&&listRect.bottom-rect.bottom>60);
-        brokenFrames=broken?brokenFrames+1:0;
-        if(brokenFrames>=3){jsSticky=true;root.dataset.sticky='js';}
-      }
-      let layout=rects.map(rect=>({top:rect.top,height:rect.height,bottom:rect.bottom}));
-      if(jsSticky){
-        let natural=listRect.top;
-        layout=stackCards.map((card,index)=>{
-          const start=natural;natural+=heights[index]+gap;
-          const limit=Math.max(0,listRect.bottom-12-(start+heights[index]+(index<stackCards.length-1?gap:0)));
-          const shift=Math.min(Math.max(tops[index]-start,0),limit);
-          card.style.setProperty('--ty',shift.toFixed(1)+'px');
-          return {top:start+shift,height:heights[index],bottom:start+shift+heights[index]};
-        });
-      }
-      const progress=layout.map((item,index)=>Math.min(1,Math.max(0,1-(item.top-tops[index])/Math.max(item.height,1))));
+      const rects=stackCards.map(card=>card.getBoundingClientRect()),tops=stackTops();
+      const progress=rects.map((rect,index)=>Math.min(1,Math.max(0,1-(rect.top-tops[index])/Math.max(rect.height,1))));
       let active=0;
       stackCards.forEach((card,index)=>{
         const depth=reduced()?0:progress.slice(index+1).reduce((sum,value)=>sum+value,0);
         card.style.setProperty('--d',depth.toFixed(3));
-        card.style.setProperty('--s',Math.min(1,Math.max(0,(innerHeight-layout[index].top)/(innerHeight+layout[index].height))).toFixed(3));
+        card.style.setProperty('--s',Math.min(1,Math.max(0,(innerHeight-rects[index].top)/(innerHeight+rects[index].height))).toFixed(3));
         if(index>0&&progress[index]>=.6)active=index;
       });
-      const inView=layout[0].top<innerHeight*.7&&layout[stackCards.length-1].bottom>0;
+      const inView=rects[0].top<innerHeight*.7&&rects[stackCards.length-1].bottom>0;
       stackCards.forEach((card,index)=>card.classList.toggle('is-active',inView&&index===active));
       if(inView&&active!==activeStack){activeStack=active;$$('.nk-stack-nav button').forEach(button=>button.setAttribute('aria-current',String(Number(button.dataset.stack)===active)));}
     };
+    const stackLabel=$('.nk-stack>.nk-eyebrow');let taps=[];
+    stackLabel?.addEventListener('click',()=>{
+      const now=Date.now();taps=taps.filter(time=>now-time<3000);taps.push(now);if(taps.length<5)return;taps=[];
+      let panel=$('#nk-diag');if(panel){panel.remove();return;}
+      panel=document.createElement('pre');panel.id='nk-diag';root.append(panel);
+      const scrollers=new Set();document.addEventListener('scroll',event=>scrollers.add(event.target===document?'document':(event.target.tagName+'#'+event.target.id+'.'+String(event.target.className).split(' ')[0])),true);
+      const describe=node=>{const style=getComputedStyle(node);const flags=[style.position,'ovf:'+style.overflowX+'/'+style.overflowY,'disp:'+style.display];if(style.transform!=='none')flags.push('transform');if(style.contain&&style.contain!=='none')flags.push('contain:'+style.contain);if(style.willChange&&style.willChange!=='auto')flags.push('will:'+style.willChange);if(style.filter!=='none')flags.push('filter');if(node.scrollHeight>node.clientHeight+1&&!/visible|clip/.test(style.overflowY))flags.push('SCROLLER');return (node.tagName.toLowerCase()+(node.id?'#'+node.id:'')+(node.className&&typeof node.className==='string'?'.'+node.className.trim().split(/\s+/).slice(0,2).join('.'):''))+'  '+flags.join(' ');};
+      const render=()=>{if(!panel.isConnected)return;const card=stackCards[0],style=getComputedStyle(card),list=stackList.getBoundingClientRect();const chain=[];for(let node=card;node;node=node.parentElement)chain.push(describe(node));
+        panel.textContent=['KP DIAG (5 taps to close)',navigator.userAgent.slice(0,120),'sticky:'+CSS.supports('position','sticky')+' clip:'+CSS.supports('overflow','clip'),'scrollY:'+Math.round(scrollY)+' scrollers:'+[...scrollers].join(','),'card0 pos:'+style.position+' top:'+style.top+' rect.top:'+Math.round(card.getBoundingClientRect().top)+' | card1 rect.top:'+Math.round(stackCards[1].getBoundingClientRect().top),'list top/bottom:'+Math.round(list.top)+'/'+Math.round(list.bottom),'--- ancestors ---',...chain].join('\n');requestAnimationFrame(render);};
+      render();
+    });
     const requestStack=()=>{if(!stackTick){stackTick=true;requestAnimationFrame(updateStack);}};
     addEventListener('scroll',requestStack,{passive:true});addEventListener('resize',requestStack);updateStack();
     root.addEventListener('click',event=>{
