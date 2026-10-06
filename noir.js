@@ -73,6 +73,32 @@
     more.hidden=!remaining;more.setAttribute('aria-expanded',String(catalogExpanded));
     more.innerHTML=catalogExpanded?'Скрыть каталог <span>↑</span>':`Показать ещё <span>${remaining}</span>`;
   }
+  const certificates=window.KP_CERTS||[{src:'',title:'Сертификат 01'},{src:'',title:'Сертификат 02'},{src:'',title:'Сертификат 03'},{src:'',title:'Сертификат 04'}];
+  let certIndex=0;
+  function renderCerts(){
+    $('#nk-proof-track').innerHTML=certificates.map((cert,index)=>cert.src?`<button type="button" class="nk-cert" data-cert="${index}" aria-label="Открыть: ${escape(cert.title)}"><img src="${escape(cert.src)}" loading="lazy" alt="${escape(cert.title)}"><span class="nk-cert-zoom" aria-hidden="true">+</span></button>`:`<div class="nk-cert" aria-disabled="true"><span class="nk-cert-empty"><b>${escape(cert.title)}</b>СКОРО ЗДЕСЬ</span></div>`).join('');
+    updateProofCount();
+  }
+  function updateProofCount(){
+    const track=$('#nk-proof-track'),items=[...track.children];if(!items.length)return;
+    const left=track.scrollLeft+(parseFloat(getComputedStyle(track).paddingLeft)||0);
+    let current=0;items.forEach((item,index)=>{if(item.offsetLeft-left<=item.offsetWidth/2)current=index;});
+    $('#nk-proof-count').textContent=`${String(current+1).padStart(2,'0')} / ${String(items.length).padStart(2,'0')}`;
+  }
+  function openCert(index){
+    const real=certificates.map((cert,n)=>cert.src?n:-1).filter(n=>n>=0);if(!real.length)return;
+    certIndex=real.includes(index)?index:real[0];
+    const cert=certificates[certIndex],box=$('#nk-lightbox');
+    $('#nk-lightbox-img').src=cert.src;$('#nk-lightbox-img').alt=cert.title;$('#nk-lightbox-caption').textContent=`${cert.title} · ${real.indexOf(certIndex)+1} / ${real.length}`;
+    box.hidden=false;document.documentElement.style.overflow='hidden';box.querySelector('.nk-lightbox-close').focus();
+  }
+  function stepCert(direction){
+    const real=certificates.map((cert,n)=>cert.src?n:-1).filter(n=>n>=0),at=real.indexOf(certIndex);
+    openCert(real[(at+direction+real.length)%real.length]);
+  }
+  function closeCert(){$('#nk-lightbox').hidden=true;document.documentElement.style.overflow='';}
+  document.addEventListener('keydown',event=>{if($('#nk-lightbox').hidden)return;if(event.key==='Escape')closeCert();if(event.key==='ArrowRight')stepCert(1);if(event.key==='ArrowLeft')stepCert(-1);});
+  $('#nk-proof-track').addEventListener('scroll',()=>requestAnimationFrame(updateProofCount),{passive:true});
   function setOffer(value,updateUrl=true){
     offer=value;root.dataset.offer=value;
     $$('[data-offer-choice]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.offerChoice===offer)));
@@ -84,6 +110,10 @@
   }
   root.addEventListener('click',event=>{
     const button=event.target.closest('button');
+    const certButton=event.target.closest('[data-cert]');if(certButton){openCert(Number(certButton.dataset.cert));return;}
+    if(button?.hasAttribute('data-cert-close')||event.target.id==='nk-lightbox'){closeCert();return;}
+    if(button?.dataset.certNav){stepCert(Number(button.dataset.certNav));return;}
+    if(button?.dataset.proofScroll){const track=$('#nk-proof-track'),card=track.firstElementChild;track.scrollBy({left:Number(button.dataset.proofScroll)*(card.offsetWidth+20),behavior:reduced()?'auto':'smooth'});return;}
     if(button?.dataset.hero){setHero(button.dataset.hero);startHeroShow();return;}
     if(button?.dataset.offerChoice){setOffer(button.dataset.offerChoice);return;}
     if(button?.dataset.filter){filterCatalog(button.dataset.filter);return;}
@@ -151,5 +181,5 @@
   const handleViewport=()=>startHeroShow();
   if(mobileHero.addEventListener)mobileHero.addEventListener('change',handleViewport);else mobileHero.addListener(handleViewport);
   document.addEventListener('visibilitychange',handleViewport);
-  renderCatalog();filterCatalog('all');setOffer(offer,false);commitHero(heroCatalog[0].id);startHeroShow();
+  renderCatalog();renderCerts();filterCatalog('all');setOffer(offer,false);commitHero(heroCatalog[0].id);startHeroShow();
 })();
