@@ -110,14 +110,13 @@
   function closeCert(){$('#nk-lightbox').hidden=true;document.documentElement.style.overflow='';}
   document.addEventListener('keydown',event=>{if($('#nk-lightbox').hidden)return;if(event.key==='Escape')closeCert();if(event.key==='ArrowRight')stepCert(1);if(event.key==='ArrowLeft')stepCert(-1);});
   $('#nk-proof-track').addEventListener('scroll',()=>requestAnimationFrame(updateProofCount),{passive:true});
-  function setOffer(value,updateUrl=true){
+  function setOffer(value){
     offer=value;root.dataset.offer=value;
     $$('[data-offer-choice]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.offerChoice===offer)));
     $('#nk-offer-description').textContent=offer==='10'?'До 10 ароматов · два сета':'До 5 ароматов · два одинаковых сета';
     $('#nk-box-offer').textContent=offer==='10'?'Во втором сете можно выбрать другое сочетание.':'Подарочный сет полностью повторяет первый.';
     $('#nk-stack-gift').textContent=offer==='10'?'Во втором сете можно выбрать другое сочетание. Доставка по Казахстану бесплатная.':'Второй сет повторяет первый и идёт в подарок. Доставка по Казахстану бесплатная.';
     $('#nk-faq-offer').textContent=offer==='10'?'Ты получаешь два сета по 50 мл за 50 000 ₸. Состав подарочного сета можно подобрать отдельно.':'Ты выбираешь до 5 ароматов. Второй сет повторяет первый и идёт в подарок. Всего 100 мл за 50 000 ₸.';
-    if(updateUrl){const url=new URL(location.href);url.searchParams.set('offer',offer);history.replaceState(null,'',url);}
   }
   root.addEventListener('click',event=>{
     const button=event.target.closest('button');
@@ -237,5 +236,5 @@
   const handleViewport=()=>startHeroShow();
   if(mobileHero.addEventListener)mobileHero.addEventListener('change',handleViewport);else mobileHero.addListener(handleViewport);
   document.addEventListener('visibilitychange',handleViewport);
-  renderCatalog();renderCerts();filterCatalog('all');setOffer(offer,false);commitHero(heroCatalog[0].id);startHeroShow();initMotion();
+  renderCatalog();renderCerts();filterCatalog('all');setOffer(offer);commitHero(heroCatalog[0].id);startHeroShow();initMotion();
 })();
