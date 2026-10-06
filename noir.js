@@ -95,24 +95,53 @@
   });
   const stackCards=$$('.nk-stack-card');
   if(stackCards.length){
-    stackCards.forEach((card,index)=>card.style.setProperty('--i',index));
-    let stackTick=false;
+    root.classList.add('nk-js');
+    const stackList=$('.nk-stack-list');
+    stackCards.forEach((card,index)=>{
+      card.style.setProperty('--i',index);
+      const nav=document.createElement('span');nav.className='nk-stack-nav';
+      nav.innerHTML=stackCards.map((_,n)=>`<button type="button" data-stack="${n}" aria-label="Плашка ${n+1}" aria-current="${n===index}"></button>`).join('');
+      card.querySelector('.nk-stack-meta').insertBefore(nav,card.querySelector('.nk-stack-meta span:last-child'));
+    });
+    const format=value=>Math.round(value).toLocaleString('ru-RU');
+    const countUp=card=>{
+      card.querySelectorAll('.nk-count').forEach(el=>{
+        const target=Number(el.dataset.to);if(reduced()||!target)return;
+        el.style.minWidth=el.offsetWidth+'px';const start=performance.now(),duration=1100;
+        const step=now=>{const t=Math.min(1,(now-start)/duration),eased=1-Math.pow(1-t,3);el.textContent=format(target*eased);if(t<1)requestAnimationFrame(step);else el.textContent=format(target);};
+        requestAnimationFrame(step);
+      });
+    };
+    if('IntersectionObserver'in window){
+      const seen=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting&&!entry.target.classList.contains('is-seen')){entry.target.classList.add('is-seen');countUp(entry.target);seen.unobserve(entry.target);}}),{threshold:.35});
+      stackCards.forEach(card=>seen.observe(card));
+    }else stackCards.forEach(card=>card.classList.add('is-seen'));
+    let stackTick=false,activeStack=-1;
+    const stackTops=()=>stackCards.map(card=>parseFloat(getComputedStyle(card).top)||0);
     const updateStack=()=>{
       stackTick=false;
-      const rects=stackCards.map(card=>card.getBoundingClientRect());
-      const tops=stackCards.map(card=>parseFloat(getComputedStyle(card).top)||0);
+      const rects=stackCards.map(card=>card.getBoundingClientRect()),tops=stackTops();
       const progress=rects.map((rect,index)=>Math.min(1,Math.max(0,1-(rect.top-tops[index])/Math.max(rect.height,1))));
       let active=0;
       stackCards.forEach((card,index)=>{
         const depth=reduced()?0:progress.slice(index+1).reduce((sum,value)=>sum+value,0);
         card.style.setProperty('--d',depth.toFixed(3));
+        card.style.setProperty('--s',Math.min(1,Math.max(0,(innerHeight-rects[index].top)/(innerHeight+rects[index].height))).toFixed(3));
         if(index>0&&progress[index]>=.6)active=index;
       });
       const inView=rects[0].top<innerHeight*.7&&rects[stackCards.length-1].bottom>0;
       stackCards.forEach((card,index)=>card.classList.toggle('is-active',inView&&index===active));
+      if(inView&&active!==activeStack){activeStack=active;$$('.nk-stack-nav button').forEach(button=>button.setAttribute('aria-current',String(Number(button.dataset.stack)===active)));}
     };
     const requestStack=()=>{if(!stackTick){stackTick=true;requestAnimationFrame(updateStack);}};
     addEventListener('scroll',requestStack,{passive:true});addEventListener('resize',requestStack);updateStack();
+    root.addEventListener('click',event=>{
+      const dot=event.target.closest('[data-stack]');if(!dot)return;
+      const index=Number(dot.dataset.stack),tops=stackTops(),gap=parseFloat(getComputedStyle(stackCards[0]).marginBottom)||0;
+      let natural=stackList.getBoundingClientRect().top+scrollY;
+      for(let n=0;n<index;n++)natural+=stackCards[n].offsetHeight+gap;
+      scrollTo({top:natural-tops[index]+(index?2:-12),behavior:reduced()?'auto':'smooth'});
+    });
   }
   heroCatalog.slice(1).forEach(item=>{const image=new Image();image.src=item.photo;});
   if('IntersectionObserver'in window){

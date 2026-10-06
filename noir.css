@@ -362,41 +362,53 @@
 #killer-perfume .nk-builder.nk-collapsible{background:transparent;border-top:1px solid var(--line);padding-top:80px;margin-top:40px}
 #killer-perfume .nk-builder.nk-collapsible .nk-section-head{margin-bottom:32px}
 
+
 #killer-perfume .nk-stack{padding-block:96px 40px}
-#killer-perfume .nk-stack-list{display:grid;gap:22px;padding-bottom:12px}
-#killer-perfume .nk-stack-card{--tint:#8faeb6;--glow:#5e87901f;--d:0;position:sticky;top:calc(24px + var(--i,0)*18px);min-height:300px;padding:26px 32px 32px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(145deg,#151d20,#0e1315);border:1px solid #293438;border-radius:10px;overflow:hidden;transform-origin:50% 0;transform:scale(calc(1 - var(--d)*.035));transition:border-color .4s,box-shadow .4s;will-change:transform}
-#killer-perfume .nk-stack-card[data-tone=gold]{--tint:#d5b98b;--glow:#80521d26}
-#killer-perfume .nk-stack-card[data-tone=wine]{--tint:#c3958f;--glow:#6d0f242e}
-#killer-perfume .nk-stack-card::before{content:"";position:absolute;inset:0;background:#090c0e;opacity:calc(var(--d)*.28);pointer-events:none;z-index:2}
-#killer-perfume .nk-stack-card::after{content:"";position:absolute;width:340px;height:340px;border-radius:50%;right:-110px;top:-130px;border:1px solid #9ab2b71a;background:radial-gradient(circle,var(--glow),transparent 68%);pointer-events:none}
-#killer-perfume .nk-stack-card.is-active{border-color:color-mix(in srgb,var(--tint) 45%,#293438);box-shadow:0 18px 60px #0007}
-#killer-perfume .nk-stack-meta{display:flex;justify-content:space-between;font-size:10px;letter-spacing:2px;color:#7f9199;position:relative;z-index:1}
+#killer-perfume .nk-stack-list{display:block;padding-bottom:12px}
+#killer-perfume .nk-stack-card{--tint:#8faeb6;--glow:#5e87901f;--d:0;--s:.5;position:sticky;top:calc(24px + var(--i,0)*20px);margin-bottom:24px;min-height:340px;padding:30px 36px 36px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(145deg,#151d20,#0e1315);border:1px solid #293438;border-radius:12px;overflow:hidden;transform-origin:50% 0;transform:scale(calc(1 - var(--d)*.05));transition:border-color .5s,box-shadow .5s;will-change:transform}
+#killer-perfume .nk-stack-card:last-child{margin-bottom:0}
+#killer-perfume .nk-stack-card[data-tone=gold]{--tint:#d5b98b;--glow:#80521d3a}
+#killer-perfume .nk-stack-card[data-tone=wine]{--tint:#c3958f;--glow:#6d0f2440}
+#killer-perfume .nk-stack-card::before{content:"";position:absolute;inset:0;background:#090c0e;opacity:calc(var(--d)*.4);pointer-events:none;z-index:2}
+#killer-perfume .nk-stack-card::after{content:"";position:absolute;width:360px;height:360px;border-radius:50%;right:-110px;top:-130px;border:1px solid #9ab2b71f;background:radial-gradient(circle,var(--glow),transparent 68%);pointer-events:none;transform:translate3d(calc(var(--s)*-90px),calc(var(--s)*70px),0) scale(calc(.8 + var(--s)*.5))}
+#killer-perfume .nk-stack-card.is-active{border-color:color-mix(in srgb,var(--tint) 55%,#293438);box-shadow:0 18px 60px #0007,0 0 0 1px color-mix(in srgb,var(--tint) 18%,transparent)}
+#killer-perfume .nk-stack-meta{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:11px;letter-spacing:2px;color:#7f9199;position:relative;z-index:3}
 #killer-perfume .nk-stack-meta span:last-child{color:var(--tint)}
-#killer-perfume .nk-stack-meta+.nk-stack-body{margin-top:34px}
-#killer-perfume .nk-stack-body{display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:end;position:relative;z-index:1}
-#killer-perfume .nk-stack-metric{font-size:clamp(56px,7vw,104px);font-weight:600;line-height:1;letter-spacing:-5px;color:var(--ink);white-space:nowrap}
-#killer-perfume .nk-stack-metric i{font-style:normal;color:#5d7077;margin-inline:.04em}
-#killer-perfume .nk-stack-metric small{font-size:.32em;letter-spacing:0;font-weight:400;color:var(--tint);margin-left:4px}
-#killer-perfume .nk-stack-body h3{font-size:26px;font-weight:400;letter-spacing:-.8px;line-height:1.2}
-#killer-perfume .nk-stack-body p{font-size:14px;line-height:1.85;color:#99aab3;margin-top:12px;max-width:430px}
-#killer-perfume .nk-stack-body ul{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:20px 0 0;padding:0}
-#killer-perfume .nk-stack-body li{font-size:11px;padding:7px 13px;border:1px solid #344044;border-radius:99px;color:#8e9da1;transition:color .4s,border-color .4s}
-#killer-perfume .nk-stack-card.is-active li{color:var(--tint);border-color:color-mix(in srgb,var(--tint) 40%,#344044)}
-#killer-perfume .nk-stack-card>.nk-stack-meta::after{content:"";position:absolute;left:0;right:0;top:-26px;height:2px;background:var(--tint);transform:scaleX(0);transform-origin:0 50%;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+#killer-perfume .nk-stack-meta::after{content:"";position:absolute;left:0;right:0;top:-30px;height:2px;background:var(--tint);transform:scaleX(0);transform-origin:0 50%;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
 #killer-perfume .nk-stack-card.is-active .nk-stack-meta::after{transform:scaleX(1)}
+#killer-perfume .nk-stack-nav{display:flex;margin-inline:auto}
+#killer-perfume .nk-stack-nav button{width:26px;height:32px;border:0;background:none;padding:0;display:grid;place-items:center}
+#killer-perfume .nk-stack-nav button::before{content:"";width:14px;height:2px;border-radius:2px;background:#3a4a50;transition:width .4s,background .4s}
+#killer-perfume .nk-stack-nav button[aria-current=true]::before{width:24px;background:var(--tint)}
+#killer-perfume .nk-stack-body{display:grid;grid-template-columns:1fr 1.05fr;gap:56px;align-items:end;margin-top:44px;position:relative;z-index:1}
+#killer-perfume .nk-stack-metric{display:block;font-size:clamp(56px,7vw,104px);font-weight:600;line-height:1;letter-spacing:-3px;word-spacing:.08em;font-variant-numeric:tabular-nums;color:var(--ink);white-space:nowrap}
+#killer-perfume .nk-stack-metric .nk-count{display:inline-block;text-align:left}
+#killer-perfume .nk-stack-metric i{font-style:normal;color:#5d7077;margin-inline:.06em}
+#killer-perfume .nk-stack-metric small{font-size:.32em;letter-spacing:0;font-weight:400;color:var(--tint);margin-left:.3em}
+#killer-perfume .nk-stack-body h3{text-wrap:balance;font-size:28px;font-weight:400;letter-spacing:-.3px;word-spacing:.06em;line-height:1.22}
+#killer-perfume .nk-stack-body p{font-size:15px;line-height:1.75;color:#a2b2ba;margin-top:16px;max-width:440px}
+#killer-perfume .nk-stack-body ul{display:flex;flex-wrap:wrap;gap:10px;list-style:none;margin:24px 0 0;padding:0}
+#killer-perfume .nk-stack-body li{font-size:12px;letter-spacing:.2px;padding:8px 15px;border:1px solid #344044;border-radius:99px;color:#8e9da1;transition:color .5s,border-color .5s}
+#killer-perfume .nk-stack-card.is-active li{color:var(--tint);border-color:color-mix(in srgb,var(--tint) 45%,#344044)}
+#killer-perfume.nk-js .nk-stack-metric,#killer-perfume.nk-js .nk-stack-body h3,#killer-perfume.nk-js .nk-stack-body p,#killer-perfume.nk-js .nk-stack-body li{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .9s cubic-bezier(.2,.7,.2,1),color .5s,border-color .5s}
+#killer-perfume.nk-js .nk-stack-body h3{transition-delay:.12s}
+#killer-perfume.nk-js .nk-stack-body p{transition-delay:.24s}
+#killer-perfume.nk-js .nk-stack-body li{transition-delay:.36s}
+#killer-perfume.nk-js .nk-stack-body li+li{transition-delay:.46s}
+#killer-perfume.nk-js .nk-stack-card.is-seen .nk-stack-metric,#killer-perfume.nk-js .nk-stack-card.is-seen .nk-stack-body h3,#killer-perfume.nk-js .nk-stack-card.is-seen .nk-stack-body p,#killer-perfume.nk-js .nk-stack-card.is-seen .nk-stack-body li{opacity:1;transform:none}
 
 @media(max-width:700px){
 #killer-perfume .nk-stack{padding-block:64px 24px}
-#killer-perfume .nk-stack-list{gap:14px}
-#killer-perfume .nk-stack-card{top:calc(14px + var(--i,0)*12px);min-height:0;padding:20px 20px 24px}
-#killer-perfume .nk-stack-card::after{width:240px;height:240px;right:-90px;top:-100px}
-#killer-perfume .nk-stack-meta+.nk-stack-body{margin-top:22px}
-#killer-perfume .nk-stack-body{grid-template-columns:1fr;gap:18px}
-#killer-perfume .nk-stack-metric{font-size:60px;letter-spacing:-3px}
-#killer-perfume .nk-stack-body h3{font-size:22px}
-#killer-perfume .nk-stack-body p{font-size:14px;margin-top:10px}
-#killer-perfume .nk-stack-body ul{margin-top:16px}
-#killer-perfume .nk-stack-card>.nk-stack-meta::after{top:-20px}
+#killer-perfume .nk-stack-card{top:calc(14px + var(--i,0)*14px);margin-bottom:16px;min-height:380px;padding:24px 22px 28px;border-radius:10px}
+#killer-perfume .nk-stack-card::after{width:260px;height:260px;right:-90px;top:-100px}
+#killer-perfume .nk-stack-meta{font-size:10px;letter-spacing:1.5px}
+#killer-perfume .nk-stack-meta::after{top:-24px}
+#killer-perfume .nk-stack-body{grid-template-columns:1fr;gap:26px;margin-top:32px}
+#killer-perfume .nk-stack-metric{font-size:58px;letter-spacing:-1.5px}
+#killer-perfume .nk-stack-body h3{font-size:23px;letter-spacing:0;line-height:1.25}
+#killer-perfume .nk-stack-body p{font-size:15px;line-height:1.7;margin-top:12px}
+#killer-perfume .nk-stack-body ul{margin-top:20px;gap:8px}
+#killer-perfume .nk-stack-body li{font-size:12px;padding:8px 14px}
 #killer-perfume .nk-brand-group{gap:24px;padding:20px 24px 20px 0}
 #killer-perfume .nk-brand-group span{font-size:10px;letter-spacing:1.6px}
 #killer-perfume .nk-brand-group i{font-size:8px}
@@ -415,4 +427,4 @@
 #killer-perfume .nk-box-photo{order:2}
 }
 
-@media(prefers-reduced-motion:reduce){#killer-perfume .nk-stack-card{transform:none!important;position:relative;top:auto}#killer-perfume .nk-stack-card::before{display:none}}
+@media(prefers-reduced-motion:reduce){@media(prefers-reduced-motion:reduce){#killer-perfume .nk-stack-card{transform:none!important;position:relative;top:auto}#killer-perfume .nk-stack-card::before{display:none}#killer-perfume .nk-stack-card::after{transform:none}}
