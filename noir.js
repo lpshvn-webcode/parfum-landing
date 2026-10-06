@@ -110,6 +110,14 @@
   function closeCert(){$('#nk-lightbox').hidden=true;document.documentElement.style.overflow='';}
   document.addEventListener('keydown',event=>{if($('#nk-lightbox').hidden)return;if(event.key==='Escape')closeCert();if(event.key==='ArrowRight')stepCert(1);if(event.key==='ArrowLeft')stepCert(-1);});
   $('#nk-proof-track').addEventListener('scroll',()=>requestAnimationFrame(updateProofCount),{passive:true});
+  function collapseCatalog(){
+    const extra=$$('.nk-fragrance-card').filter(card=>!card.hidden).slice(3);
+    const finish=()=>{catalogExpanded=false;updateCatalogVisibility();extra.forEach(card=>card.classList.remove('is-leaving'));};
+    $('#kp-builder').scrollIntoView({behavior:reduced()?'auto':'smooth',block:'start'});
+    if(reduced()||!extra.length){finish();return;}
+    extra.forEach((card,index)=>{card.style.setProperty('--ld',Math.min(index,6)*25+'ms');card.classList.add('is-leaving');});
+    setTimeout(finish,620);
+  }
   function setOffer(value){
     offer=value;root.dataset.offer=value;
     $$('[data-offer-choice]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.offerChoice===offer)));
@@ -127,7 +135,7 @@
     if(button?.dataset.hero){setHero(button.dataset.hero);startHeroShow();return;}
     if(button?.dataset.offerChoice){setOffer(button.dataset.offerChoice);return;}
     if(button?.dataset.filter){filterCatalog(button.dataset.filter);return;}
-    if(button?.id==='nk-show-more'){catalogExpanded=!catalogExpanded;updateCatalogVisibility();return;}
+    if(button?.id==='nk-show-more'){if(catalogExpanded)collapseCatalog();else{catalogExpanded=true;updateCatalogVisibility();}return;}
     const card=event.target.closest('.nk-fragrance-card');
     if(card){const open=card.getAttribute('aria-expanded')==='true';card.setAttribute('aria-expanded',String(!open));return;}
     const anchor=event.target.closest('a[href^="#kp-"]');
@@ -136,6 +144,7 @@
   const stackCards=$$('.nk-stack-card');
   if(stackCards.length){
     root.classList.add('nk-js');
+    if(CSS.supports('overflow','clip')){for(let node=root.parentElement;node&&node!==document.documentElement;node=node.parentElement){const style=getComputedStyle(node);if(/hidden|auto|scroll/.test(style.overflowX+' '+style.overflowY))node.style.setProperty('overflow','clip','important');}}
     const stackList=$('.nk-stack-list');
     stackCards.forEach((card,index)=>{
       card.style.setProperty('--i',index);
