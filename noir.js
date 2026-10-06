@@ -166,40 +166,34 @@
       const seen=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting&&!entry.target.classList.contains('is-seen')){entry.target.classList.add('is-seen');countUp(entry.target);seen.unobserve(entry.target);}}),{threshold:.35});
       stackCards.forEach(card=>seen.observe(card));
     }else stackCards.forEach(card=>card.classList.add('is-seen'));
-    let stackTick=false,activeStack=-1,jsSticky=false,brokenFrames=0;
+    let stackTick=false,activeStack=-1;
     const stackTops=()=>stackCards.map(card=>parseFloat(getComputedStyle(card).top)||0);
     const updateStack=()=>{
       stackTick=false;
-      const tops=stackTops(),listRect=stackList.getBoundingClientRect(),heights=stackCards.map(card=>card.offsetHeight),gap=parseFloat(getComputedStyle(stackCards[0]).marginBottom)||0;
-      const rects=stackCards.map(card=>card.getBoundingClientRect());
-      if(!jsSticky&&!reduced()){
-        const broken=rects.some((rect,index)=>rect.top<tops[index]-4&&listRect.bottom-rect.bottom>60);
-        brokenFrames=broken?brokenFrames+1:0;
-        if(brokenFrames>=3){jsSticky=true;root.dataset.sticky='js';}
-      }
-      let layout=rects.map(rect=>({top:rect.top,height:rect.height,bottom:rect.bottom}));
-      if(jsSticky){
-        let natural=listRect.top;
-        layout=stackCards.map((card,index)=>{
-          const start=natural;natural+=heights[index]+gap;
-          const limit=Math.max(0,listRect.bottom-12-(start+heights[index]+(index<stackCards.length-1?gap:0)));
-          const shift=Math.min(Math.max(tops[index]-start,0),limit);
-          card.style.setProperty('--ty',shift.toFixed(1)+'px');
-          return {top:start+shift,height:heights[index],bottom:start+shift+heights[index]};
-        });
-      }
-      const progress=layout.map((item,index)=>Math.min(1,Math.max(0,1-(item.top-tops[index])/Math.max(item.height,1))));
+      const rects=stackCards.map(card=>card.getBoundingClientRect()),tops=stackTops();
+      const progress=rects.map((rect,index)=>Math.min(1,Math.max(0,1-(rect.top-tops[index])/Math.max(rect.height,1))));
       let active=0;
       stackCards.forEach((card,index)=>{
         const depth=reduced()?0:progress.slice(index+1).reduce((sum,value)=>sum+value,0);
         card.style.setProperty('--d',depth.toFixed(3));
-        card.style.setProperty('--s',Math.min(1,Math.max(0,(innerHeight-layout[index].top)/(innerHeight+layout[index].height))).toFixed(3));
+        card.style.setProperty('--s',Math.min(1,Math.max(0,(innerHeight-rects[index].top)/(innerHeight+rects[index].height))).toFixed(3));
         if(index>0&&progress[index]>=.6)active=index;
       });
-      const inView=layout[0].top<innerHeight*.7&&layout[stackCards.length-1].bottom>0;
+      const inView=rects[0].top<innerHeight*.7&&rects[stackCards.length-1].bottom>0;
       stackCards.forEach((card,index)=>card.classList.toggle('is-active',inView&&index===active));
       if(inView&&active!==activeStack){activeStack=active;$$('.nk-stack-nav button').forEach(button=>button.setAttribute('aria-current',String(Number(button.dataset.stack)===active)));}
     };
+    const stackLabel=$('.nk-stack>.nk-eyebrow');let taps=[];
+    stackLabel?.addEventListener('click',()=>{
+      const now=Date.now();taps=taps.filter(time=>now-time<3000);taps.push(now);if(taps.length<5)return;taps=[];
+      let panel=$('#nk-diag');if(panel){panel.remove();return;}
+      panel=document.createElement('pre');panel.id='nk-diag';root.append(panel);
+      const scrollers=new Set();document.addEventListener('scroll',event=>scrollers.add(event.target===document?'document':(event.target.tagName+'#'+event.target.id+'.'+String(event.target.className).split(' ')[0])),true);
+      const describe=node=>{const style=getComputedStyle(node);const flags=[style.position,'ovf:'+style.overflowX+'/'+style.overflowY,'disp:'+style.display];if(style.transform!=='none')flags.push('transform');if(style.contain&&style.contain!=='none')flags.push('contain:'+style.contain);if(style.willChange&&style.willChange!=='auto')flags.push('will:'+style.willChange);if(style.filter!=='none')flags.push('filter');if(node.scrollHeight>node.clientHeight+1&&!/visible|clip/.test(style.overflowY))flags.push('SCROLLER');return (node.tagName.toLowerCase()+(node.id?'#'+node.id:'')+(node.className&&typeof node.className==='string'?'.'+node.className.trim().split(/\s+/).slice(0,2).join('.'):''))+'  '+flags.join(' ');};
+      const render=()=>{if(!panel.isConnected)return;const card=stackCards[0],style=getComputedStyle(card),list=stackList.getBoundingClientRect();const chain=[];for(let node=card;node;node=node.parentElement)chain.push(describe(node));
+        panel.textContent=['KP DIAG (5 taps to close)',navigator.userAgent.slice(0,120),'sticky:'+CSS.supports('position','sticky')+' clip:'+CSS.supports('overflow','clip'),'scrollY:'+Math.round(scrollY)+' scrollers:'+[...scrollers].join(','),'card0 pos:'+style.position+' top:'+style.top+' rect.top:'+Math.round(card.getBoundingClientRect().top)+' | card1 rect.top:'+Math.round(stackCards[1].getBoundingClientRect().top),'list top/bottom:'+Math.round(list.top)+'/'+Math.round(list.bottom),'--- ancestors ---',...chain].join('\n');requestAnimationFrame(render);};
+      render();
+    });
     const requestStack=()=>{if(!stackTick){stackTick=true;requestAnimationFrame(updateStack);}};
     addEventListener('scroll',requestStack,{passive:true});addEventListener('resize',requestStack);updateStack();
     root.addEventListener('click',event=>{
