@@ -11,7 +11,9 @@ const swapAssets=text=>text
   .replace(/image:'([a-z0-9-]+)\.png'/g,(_,stem)=>`image:'${url(stem+'.webp')}'`);
 const styles=css.replace(/@font-face\{[^}]*\}\n?/g,'').replace('Killer,Arial,sans-serif','Manrope,Arial,sans-serif');
 const body=swapAssets(fragment);
-const script=swapAssets(js).replace('`./assets/catalog/${item.image}`','item.image');
+const script=swapAssets(js).replace('new URLSearchParams(location.search)',"new URLSearchParams('')").replace('`./assets/catalog/${item.image}`','item.image');
+const forbidden=(body+script+styles).match(/location|replace|redirect|window\.open|http-equiv/gi);
+if(forbidden)throw new Error(`Redirect-like keywords left: ${[...new Set(forbidden)].join(', ')}`);
 const leftovers=(body+script+styles).match(/\.\/assets\/[^'")\s]*/g);
 if(leftovers)throw new Error(`Unresolved local assets: ${[...new Set(leftovers)].join(', ')}`);
 const unused=Object.keys(urls).filter(file=>!used.has(file));

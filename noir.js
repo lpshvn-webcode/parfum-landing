@@ -37,7 +37,7 @@
     {name:'Orto Parisi Megamare',group:'men',image:'orto-parisi-megamare.png',sound:'Морское, солёное, минеральное',notes:'Морские аккорды, соль, амбра, мускус'},
     {name:'Hormone Parisi Gaba',group:'men',image:'hormone-parisi-gaba.png',sound:'Мягкое, мускусное, амбровое',notes:'Мускус, амбра, древесные и минеральные оттенки'}
   ];
-  const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const escape=value=>{const holder=document.createElement('div');holder.textContent=String(value);return holder.innerHTML.split('"').join('&quot;').split("'").join('&#39;');};
   const params=new URLSearchParams(location.search);
   let offer=['5','10'].includes(params.get('offer'))?params.get('offer'):(root.dataset.offer==='5'?'5':'10');
   let heroIndex=0,heroTimer=null,heroSwapTimer=null,heroVisible=true,catalogFilter='all',catalogExpanded=false;
@@ -194,7 +194,7 @@
       if(child.nodeType===3){
         const fragment=document.createDocumentFragment();
         child.textContent.split(/(\s+)/).forEach(part=>{if(!part)return;if(/^\s+$/.test(part)){fragment.append(document.createTextNode(part));return;}const word=document.createElement('b');word.className='nk-w';word.textContent=part;word.style.setProperty('--wi',wordIndex++);fragment.append(word);});
-        child.replaceWith(fragment);
+        child.parentNode.insertBefore(fragment,child);child.remove();
       }else if(child.nodeType===1&&child.tagName!=='BR')split(child);
     });
     $$('h2').forEach(heading=>{wordIndex=0;split(heading);heading.classList.add('nk-split');io.observe(heading);});

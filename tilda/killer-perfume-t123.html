@@ -642,8 +642,8 @@
     {name:'Orto Parisi Megamare',group:'men',image:'https://static.tildacdn.ink/tild3230-6564-4361-b236-396362333166/orto-parisi-megamare.webp',sound:'Морское, солёное, минеральное',notes:'Морские аккорды, соль, амбра, мускус'},
     {name:'Hormone Parisi Gaba',group:'men',image:'https://static.tildacdn.ink/tild3565-6630-4166-a131-316164373035/hormone-parisi-gaba.webp',sound:'Мягкое, мускусное, амбровое',notes:'Мускус, амбра, древесные и минеральные оттенки'}
   ];
-  const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const params=new URLSearchParams(location.search);
+  const escape=value=>{const holder=document.createElement('div');holder.textContent=String(value);return holder.innerHTML.split('"').join('&quot;').split("'").join('&#39;');};
+  const params=new URLSearchParams('');
   let offer=['5','10'].includes(params.get('offer'))?params.get('offer'):(root.dataset.offer==='5'?'5':'10');
   let heroIndex=0,heroTimer=null,heroSwapTimer=null,heroVisible=true,catalogFilter='all',catalogExpanded=false;
   function commitHero(id){
@@ -799,7 +799,7 @@
       if(child.nodeType===3){
         const fragment=document.createDocumentFragment();
         child.textContent.split(/(\s+)/).forEach(part=>{if(!part)return;if(/^\s+$/.test(part)){fragment.append(document.createTextNode(part));return;}const word=document.createElement('b');word.className='nk-w';word.textContent=part;word.style.setProperty('--wi',wordIndex++);fragment.append(word);});
-        child.replaceWith(fragment);
+        child.parentNode.insertBefore(fragment,child);child.remove();
       }else if(child.nodeType===1&&child.tagName!=='BR')split(child);
     });
     $$('h2').forEach(heading=>{wordIndex=0;split(heading);heading.classList.add('nk-split');io.observe(heading);});
